@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {NbThemeModule, NbLayoutModule, NbCardModule, NbRouteTabsetModule} from '@nebular/theme';
+import {NbThemeModule, NbLayoutModule, NbCardModule, NbRouteTabsetModule, NbInputModule, NbButtonModule} from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
@@ -26,7 +26,9 @@ import {HttpService} from './com/project/services/http.service';
     NbLayoutModule,
     NbEvaIconsModule,
     NbCardModule,
-    NbRouteTabsetModule
+    NbRouteTabsetModule,
+    NbInputModule,
+    NbButtonModule
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
