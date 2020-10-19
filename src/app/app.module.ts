@@ -10,6 +10,8 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { AuthComponent } from './com/project/login/auth/auth.component';
 import {HttpService} from './com/project/services/http.service';
+import {StoreModule} from "@ngrx/store";
+import {appReducers} from "./com/project/store/app-reducers";
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import {HttpService} from './com/project/services/http.service';
     NbCardModule,
     NbRouteTabsetModule,
     NbInputModule,
-    NbButtonModule
+    NbButtonModule,
+    StoreModule.forRoot(appReducers)
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
