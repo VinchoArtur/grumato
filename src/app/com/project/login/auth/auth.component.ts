@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from '../../services/http.service';
+import {Store} from "@ngrx/store";
+import {LoginPageActions, LoginUser} from "../../store/login-store/login-page.actions";
 
 @Component({
   selector: 'app-auth',
@@ -8,7 +10,7 @@ import {HttpService} from '../../services/http.service';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private httpService: HttpService) {
+  constructor(private httpService: HttpService, private store: Store) {
   }
 
   users: any;
@@ -25,6 +27,10 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit() {
-
+    this.store.dispatch(new LoginUser({
+      userName: 'admin',
+      password: 'admin',
+      userId: 111
+    }))
   }
 }
