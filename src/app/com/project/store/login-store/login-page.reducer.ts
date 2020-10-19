@@ -10,8 +10,8 @@ export const loginPageReducers = (
     case LoginPageActions.Login: {
       let modifiedState: LoginPageState = {...state};
       let userName = action.payload.userName + 'changed';
-      modifiedState.login.userName = userName;
-      alert(userName);
+      modifiedState.login = action.payload;
+      alert(modifiedState.login.userName + " changed");
       return {
         ...modifiedState,
         login: action.payload
