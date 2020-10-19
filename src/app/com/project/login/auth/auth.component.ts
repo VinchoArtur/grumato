@@ -8,12 +8,13 @@ import {HttpService} from '../../services/http.service';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {
+  }
 
   users: any;
   tabs: any;
 
-  getUserData(){
+  getUserData() {
     this.httpService.getUserData().subscribe(value => {
       this.users = value;
       console.log(this.users);
@@ -23,7 +24,7 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onLogin() {
+  onSubmit() {
 
   }
 }
