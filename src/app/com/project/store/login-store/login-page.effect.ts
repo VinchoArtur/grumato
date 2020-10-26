@@ -18,15 +18,15 @@ export class LoginPageEffect {
     ofType<SignUpUser>(LoginPageActions.SignUpUser),
     map((action) => {
       this.httpServie.signUpUserData(action.payload).subscribe(value => {
-        if (value == '200') {
+        if ( (value as {status: string, code: string}).status == 'success') {
           this.toastrService.success(
-            'Сохранено',
-            'Сохранение'
+            'Done',
+            'Creating'
           );
         } else {
           this.toastrService.danger(
-            value,
-            'Error'
+            'Error',
+            'Creating'
           );
         }
       });

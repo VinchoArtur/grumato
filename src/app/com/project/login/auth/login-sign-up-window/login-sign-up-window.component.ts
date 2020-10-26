@@ -4,7 +4,7 @@ import {NbDialogRef, NbDialogService, NbToastrService} from '@nebular/theme';
 @Component({
   selector: 'app-login-sign-up-window',
   templateUrl: './login-sign-up-window.component.html',
-  styleUrls: ['./login-sign-up-window.component.css']
+  styleUrls: ['./login-sign-up-window.component.scss']
 })
 export class LoginSignUpWindowComponent implements OnInit {
   userName: string;

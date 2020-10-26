@@ -2,62 +2,20 @@
   <nb-layout-column class="colored-column-basic d-flex align-items-center justify-content-center">
     <nb-card class="container text-center col-md-3">
       <nb-card-header>
-        Login
-        <button nbButton class="float-right btn btn-primary" status="success" data-toggle="modal" data-target="#myModal"    (click)="open()">Sign up</button>
-                <!-- The Modal -->
-        <div class="modal fade" id="myModal">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-
-              <!-- Modal Header -->
-              <div class="modal-header">
-                <h4 class="modal-title">Modal Heading</h4>
-                <button type="button" class="close" data-dismiss="modal">×</button>
-              </div>
-
-              <!-- Modal body -->
-              <div class="modal-body">
-                Modal body..
-              </div>
-
-              <!-- Modal footer -->
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-
-<!--        <ng-template #content let-c="close" let-d="dismiss">-->
-<!--          <div class="modal-header">-->
-<!--            <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>-->
-<!--            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">-->
-<!--              <span aria-hidden="true">&times;</span>-->
-<!--            </button>-->
-<!--          </div>-->
-<!--          <div class="modal-body">-->
-<!--            <p>Hello, World!</p>-->
-<!--          </div>-->
-<!--          <div class="modal-footer">-->
-<!--            <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>-->
-<!--          </div>-->
-<!--        </ng-template>-->
-
-
+        <button nbButton class="float-left btn btn-primary" status="success" data-toggle="modal" data-target="#myModal" (click)="open()">Sign up</button>
+        <div class="login">Login</div>
       </nb-card-header>
       <nb-card-body>
         <div class="form-group row">
             <input type="text" nbInput fullWidth status="info" placeholder="Login" [(ngModel)]="userName" >
         </div>
         <div class="form-group row">
-            <input type="text" nbInput fullWidth status="info" placeholder="Password" [(ngModel)]="password" >
+            <input type="password" nbInput fullWidth status="info" placeholder="Password" [(ngModel)]="password" >
         </div>
       </nb-card-body>
       <nb-card-footer>
-        <button nbButton class="float-left" status="success" [disabled]="isUserName()" (click)="onSubmit()">Sign in</button>
-        <button nbButton class="float-right" status="basic">Cancel</button>
+        <button nbButton class="float-left" status="success" [disabled]="isUserName()" [disabled]="isPassword()" (click)="onSubmit()">Sign in</button>
+        <button nbButton class="float-right" status="basic" (click)="onClear()">Cancel</button>
       </nb-card-footer>
     </nb-card>
   </nb-layout-column>
