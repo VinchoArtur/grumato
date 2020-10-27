@@ -9,18 +9,23 @@ import {NbDialogRef, NbDialogService, NbToastrService} from '@nebular/theme';
 export class LoginSignUpWindowComponent implements OnInit {
   userName: string;
   password: string;
+  isName: boolean = false;
 
   constructor(protected ref: NbDialogRef<LoginSignUpWindowComponent>, private dialogService: NbDialogService, private toastrService: NbToastrService) {
   }
 
   ngOnInit(): void {
+
   }
 
   submit() {
+    if (!this.userName) {
+      this.isName = true
+    }
     if (this.userName && this.password) {
       this.ref.close({name: this.userName, password: this.password});
     } else {
-      this.toastrService.danger("Please write login/password", "danger", {duration: 2000})
+      this.toastrService.danger("Please write Login / Password", "Attention", {duration: 2000})
     }
   }
 

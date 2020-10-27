@@ -70,12 +70,12 @@ export class AuthComponent implements OnInit {
     }).onClose.subscribe(value => {
       if (value) {
        userLogin = value.name;
-       userPassword = value.password
+       userPassword = value.password;
+        this.store.dispatch(new SignUpUser({
+          userName: userLogin,
+          password: userPassword
+        }));
       }
-      this.store.dispatch(new SignUpUser({
-        userName: userLogin,
-        password: userPassword
-      }));
     }).add();
 
   }
