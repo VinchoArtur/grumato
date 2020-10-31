@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from '../../services/http.service';
-import {LoginUser, SignUpUser} from '../../store/login-store/login-page.actions';
+import {LoginPageActions, LoginUser, SignUpUser} from '../../store/login-store/login-page.actions';
 import {NbDialogRef, NbDialogService, NbToastrService} from '@nebular/theme';
 import {LoginSignUpWindowComponent} from './login-sign-up-window/login-sign-up-window.component';
 import {Store} from '@ngrx/store';
@@ -38,10 +38,11 @@ export class AuthComponent implements OnInit {
     //   userId: 111
     // }));
 
-    if (this.userName && this.password){
-      this.toastrService.success("You write " + this.userName + " " + this.password, "success", {duration: 2000})
-    } else {
-      this.toastrService.danger("Please write login/password", "danger", {duration: 2000})
+    if (this.userName && this.password) {
+      this.store.dispatch(new LoginUser({
+        userName: this.userName,
+        password: this.password
+      }));
     }
   }
 

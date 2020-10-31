@@ -4,7 +4,8 @@ import {SignUpModel} from '../../login/login-model/sign-up.model';
 
 export enum LoginPageActions {
   Login = '[Login] Login User',
-  SignUpUser = '[Login] Sign Up User'
+  SignUpUser = '[Login] Sign Up User',
+  SignInUser = '[Login] Sign In User'
 }
 
 export class LoginUser implements Action {
@@ -18,4 +19,9 @@ export class SignUpUser implements Action {
   constructor(public payload: SignUpModel) {}
 }
 
-export type LoginActions = LoginUser | SignUpUser
+export class SignInUser implements Action {
+  public readonly type = LoginPageActions.SignInUser;
+  constructor(public payload: LoginModel) {}
+}
+
+export type LoginActions = LoginUser | SignUpUser | SignInUser

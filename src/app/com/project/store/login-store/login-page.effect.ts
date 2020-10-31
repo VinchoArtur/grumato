@@ -4,7 +4,7 @@ import {Store} from '@ngrx/store';
 import {Router} from '@angular/router';
 import {NbToastrService} from '@nebular/theme';
 import {AppGrumatoState} from '../app-grumato.state';
-import {LoginPageActions, SignUpUser} from './login-page.actions';
+import {LoginPageActions, LoginUser, SignUpUser} from './login-page.actions';
 import {map} from 'rxjs/operators';
 import {HttpService} from '../../services/http.service';
 
@@ -33,6 +33,22 @@ export class LoginPageEffect {
     })
   );
 
+  @Effect({dispatch: false})
+  signInUser$ = this.actions$.pipe(
+    ofType<LoginUser>(LoginPageActions.Login),
+    map((action) => {
+      this.httpServie.signInUserData(action.payload).subscribe(value => {
+        if ( (value as {status: string, code: string}).status == 'true') {
+          this.router.navigate(['/view']);
+        } else {
+          this.toastrService.danger(
+            'Error',
+            'Authorisation'
+          );
+        }
+      });
+    })
+  );
 
   constructor(private actions$: Actions,
               private store: Store<AppGrumatoState>,

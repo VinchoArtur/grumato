@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {SignUpModel} from '../login/login-model/sign-up.model';
+import {LoginModel} from '../login/login-model/login.model';
 
 @Injectable()
 export class HttpService {
@@ -21,6 +22,18 @@ export class HttpService {
     }
     return this.http.post('http://localhost:8080/login/add', {login: {
       userName: userData.userName, userPassword: userData.password
+      }})
+  }
+
+  signInUserData(loginData: LoginModel){
+    let requestBody = {
+      login: {
+        userName: loginData.userName,
+        userPassword: loginData.password
+      }
+    }
+    return this.http.post('http://localhost:8080/login/auth', {login: {
+        userName: loginData.userName, userPassword: loginData.password
       }})
   }
 }
