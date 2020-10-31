@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpService} from '../../services/http.service';
-import {LoginUser, SignUpUser} from '../../store/login-store/login-page.actions';
-import {NbDialogService} from '@nebular/theme';
+import {LoginPageActions, LoginUser, SignUpUser} from '../../store/login-store/login-page.actions';
+import {NbDialogRef, NbDialogService, NbToastrService} from '@nebular/theme';
 import {LoginSignUpWindowComponent} from './login-sign-up-window/login-sign-up-window.component';
 import {Store} from '@ngrx/store';
 import {AppGrumatoState} from '../../store/app-grumato.state';
@@ -13,7 +13,7 @@ import {AppGrumatoState} from '../../store/app-grumato.state';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private httpService: HttpService, private store: Store<AppGrumatoState>, private dialogService: NbDialogService) {
+  constructor(private httpService: HttpService, private store: Store<AppGrumatoState>, private dialogService: NbDialogService, private toastrService: NbToastrService) {
   }
 
 
@@ -32,15 +32,35 @@ export class AuthComponent implements OnInit {
 
 
   onSubmit() {
-    this.store.dispatch(new LoginUser({
-      userName: this.userName,
-      password: this.password,
-      userId: 111
-    }));
+    // this.store.dispatch(new LoginUser({
+    //   userName: this.userName,
+    //   password: this.password,
+    //   userId: 111
+    // }));
+
+    if (this.userName && this.password) {
+      this.store.dispatch(new LoginUser({
+        userName: this.userName,
+        password: this.password
+      }));
+    }
+  }
+
+  onClear(){
+    if (this.userName || this.password){
+      this.userName = "";
+      this.password = "";
+      this.toastrService.success("Clear", "success", {duration: 2000})
+    }
+    return status = "success";
   }
 
   isUserName(): boolean {
     return !this.userName;
+  }
+
+  isPassword(): boolean {
+    return !this.password;
   }
 
   open() {
@@ -51,12 +71,12 @@ export class AuthComponent implements OnInit {
     }).onClose.subscribe(value => {
       if (value) {
        userLogin = value.name;
-       userPassword = value.password
+       userPassword = value.password;
+        this.store.dispatch(new SignUpUser({
+          userName: userLogin,
+          password: userPassword
+        }));
       }
-      this.store.dispatch(new SignUpUser({
-        userName: userLogin,
-        password: userPassword
-      }));
     }).add();
 
   }
