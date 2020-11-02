@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NbDialogRef, NbDialogService, NbToastrService} from '@nebular/theme';
 
 @Component({
@@ -33,4 +33,16 @@ export class LoginSignUpWindowComponent implements OnInit {
     this.ref.close();
   }
 
+  isChange(element: HTMLElement) {
+    switch (element.id) {
+      case 'userName': this.changeStyleInput(element);
+      break;
+      case "userPassword": this.changeStyleInput(element);
+      break;
+    }
+  }
+
+  private changeStyleInput(element) {
+    element.value ? element.style.border = '1px solid green' : element.style.border = '1px solid red'
+  }
 }

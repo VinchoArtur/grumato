@@ -3,12 +3,11 @@
   <nb-card-body>
     <div class=" form-group col-md-12 ">
       <label for="userName" class="label">login</label>
-      <div status="danger" *ngIf="isName"> алпмрваол</div>
-      <input type="text" nbInput id="userName" [(ngModel)]="userName">
+      <input type="text" status="success" nbInput id="userName" #userNameInput [(ngModel)]="userName" (ngModelChange)="isChange(userNameInput)">
     </div>
     <div class=" form-group col-md-12 ">
       <label for="userPassword" class="label">Password</label>
-      <input type="password" nbInput status="success" id="userPassword" [(ngModel)]="password">
+      <input type="password" nbInput status="success" id="userPassword" #userPasswordInput [(ngModel)]="password" (ngModelChange)="isChange(userPasswordInput)">
     </div>
   </nb-card-body>
   <nb-card-footer>
