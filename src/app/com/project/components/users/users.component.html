@@ -1,0 +1,50 @@
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-md-10">
+        <button nbButton status="success" (click)="onAddWorker()">Добавить работника</button>
+      </div>
+      <div class="col-md-2">
+        <button nbButton status="info" class="float-right" (click)="onSave()">Сохранить</button>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <ul>
+      <li *ngFor="let dataUser of users">
+        <nb-card style="border: 1px solid aquamarine">
+          <nb-card-header>
+            <div class="row">
+              <div class="col-md-10">
+                {{dataUser.Group}} - {{dataUser.name}}
+              </div>
+              <div class="col-md-2">
+                <button nbButton status="danger" class="float-right" (click)="onDelete(dataUser)">Удалить</button>
+              </div>
+            </div>
+          </nb-card-header>
+          <nb-card-body>
+            <div class="row">
+              <div class="col-md-3">
+                <label for="userName" class="label">Имя: </label>
+                <input type="text" id="userName" nbInput value="{{dataUser.name}}">
+              </div>
+              <div class="col-md-3">
+                <label for="userGroup" class="label">Позиция: </label>
+                <input type="text" id="userGroup" nbInput value="{{dataUser.Group}}">
+              </div>
+              <div class="col-md-3">
+                <label for="userComand" class="label">Команда: </label>
+                <input type="text" id="userComand" nbInput value="{{dataUser.Command}}">
+              </div>
+              <div class="col-md-3">
+                <label for="userProject" class="label">Проект: </label>
+                <input type="text" id="userProject" nbInput value="{{dataUser.Project}}">
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </li>
+    </ul>
+  </nb-card-body>
+</nb-card>

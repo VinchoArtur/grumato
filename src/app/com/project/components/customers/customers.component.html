@@ -1,0 +1,52 @@
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-md-10">
+        <button nbButton status="success" (click)="onAddCustomer()">Добавить заказчика</button>
+      </div>
+      <div class="col-md-2">
+        <button nbButton status="info" class="float-right" (click)="onSave()">Сохранить</button>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <ul>
+      <li *ngFor="let dataUser of customers">
+        <nb-card style="border: 1px solid aquamarine">
+          <nb-card-header>
+            <div class="row">
+              <div class="col-md-10">
+                {{dataUser.Order}} - {{dataUser.name}}
+              </div>
+              <div class="col-md-2">
+                <button nbButton status="danger" class="float-right" (click)="onDelete(dataUser)">Удалить</button>
+              </div>
+            </div>
+          </nb-card-header>
+
+          <nb-card-body>
+            <div class="row">
+              <div class="col-md-3">
+                <label for="customerName" class="label">Заказчик: </label>
+                <input type="text" id="customerName" nbInput value="{{dataUser.name}}">
+              </div>
+              <div class="col-md-3">
+                <label for="customerOrder" class="label">Название проекта: </label>
+                <input type="text" id="customerOrder" nbInput value="{{dataUser.Order}}">
+              </div>
+              <div class="col-md-3">
+                <label for="customerCompany" class="label">Название компании: </label>
+                <input type="text" id="customerCompany" nbInput value="{{dataUser.CompanyName}}">
+              </div>
+              <div class="col-md-3">
+                <label for="customerPay" class="label">Рэйт: </label>
+                <input type="text" id="customerPay" nbInput value="{{dataUser.Pay}}">
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </li>
+    </ul>
+
+  </nb-card-body>
+</nb-card>

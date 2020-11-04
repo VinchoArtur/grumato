@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {SignUpModel} from '../login/login-model/sign-up.model';
 import {LoginModel} from '../login/login-model/login.model';
+import {UsersEntry} from '../components/component-models/users-model/user.model';
+import {OrderEntry} from '../components/component-models/orders-model/order.model';
+import {CustomerEntry} from '../components/component-models/customers-model/customer.model';
 
 @Injectable()
 export class HttpService {
@@ -35,5 +38,69 @@ export class HttpService {
     return this.http.post('http://localhost:8080/login/auth', {login: {
         userName: loginData.userName, userPassword: loginData.password
       }})
+  }
+
+
+  //      additionally http ref
+
+
+
+  postCustomer(customer: CustomerEntry[]) {
+    let body = {
+      customerEntry: customer
+    };
+    let value = JSON.stringify(body);
+    console.log("value...");
+    console.log(value);
+    return this.http.post("http://localhost:8080/customers/add", value, {headers: {"Content-type": "application/json"}})
+  }
+  deleteCustomer(value: CustomerEntry) {
+    let body = {
+      customer: value
+    };
+    let s = JSON.stringify(body);
+    console.log("delete");
+    console.log(value);
+    return this.http.post("http://localhost:8080/customers/delete", s, {headers: {"Content-type": "application/json"}})
+  }
+
+  postOrders(order: OrderEntry[]) {
+    let body = {
+      orderEntry: order
+    };
+    let value = JSON.stringify(body);
+    console.log("value...");
+    console.log(value);
+    return this.http.post("http://localhost:8080/orders/add", value, {headers: {"Content-type": "application/json"}})
+  }
+
+  deleteOrder(value: OrderEntry) {
+    let body = {
+      order: value
+    };
+    let s = JSON.stringify(body);
+    console.log("delete");
+    console.log(value);
+    return this.http.post("http://localhost:8080/orders/delete", s, {headers: {"Content-type": "application/json"}})
+  }
+
+  postUsers(user:UsersEntry[]) {
+    let body = {
+      userEntry: user
+    };
+    let value = JSON.stringify(body);
+    console.log("value...");
+    console.log(value);
+    return this.http.post("http://localhost:8080/users/add", value, {headers: {"Content-type": "application/json"}})
+  }
+
+  deleteUser(value: UsersEntry) {
+    let body = {
+      user: value
+    };
+    let s = JSON.stringify(body);
+    console.log("delete");
+    console.log(value);
+    return this.http.post("http://localhost:8080/users/delete", s, {headers: {"Content-type": "application/json"}})
   }
 }

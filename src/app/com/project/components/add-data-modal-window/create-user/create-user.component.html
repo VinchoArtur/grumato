@@ -1,0 +1,19 @@
+<div class="col-md-12">
+  <nb-card>
+    <nb-card-header>Worker</nb-card-header>
+    <nb-card-body>
+      <input type="text" nbInput class="login_input" placeholder="please enter name" [(ngModel)]="this.name">
+      <input type="text" nbInput class="login_input" placeholder="please enter command" [(ngModel)]="this.command">
+      <input type="text" nbInput class="login_input" placeholder="please enter Group" [(ngModel)]="this.group">
+      <input type="text" nbInput class="login_input" placeholder="please enter Project" [(ngModel)]="this.project">
+      <div class="row">
+        <div class="col-md-6">
+          <button nbButton status="info"  (click)="submit()">ok</button>
+        </div>
+        <div class="col-md-4">
+          <button nbButton status="danger" class="login_button" (click)="cancel()">cancel</button>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

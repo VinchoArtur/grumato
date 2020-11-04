@@ -12,4 +12,21 @@ export class GrumatoViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  tabs: any[] = [
+    {
+      title: 'Users',
+      route: 'users',
+    },
+    {
+      title: 'Orders',
+      responsive: true,
+      route: 'orders',
+    },
+    {
+      title: 'Customers',
+      responsive: true,
+      route: 'customers',
+    }
+  ];
+
 }

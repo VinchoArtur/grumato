@@ -13,7 +13,7 @@ import {
   NbRouteTabsetModule,
   NbThemeModule,
   NbToastrModule,
-  NbToastrService
+  NbToastrService, NbTreeGridModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {FormsModule} from '@angular/forms';
@@ -26,13 +26,25 @@ import {LoginSignUpWindowComponent} from './com/project/login/auth/login-sign-up
 import {EffectsModule} from '@ngrx/effects';
 import {LoginPageEffect} from './com/project/store/login-store/login-page.effect';
 import {GrumatoViewComponent} from './com/project/components/grumato-view/grumato-view.component';
+import { CustomersComponent } from './com/project/components/customers/customers.component';
+import { OrdersComponent } from './com/project/components/orders/orders.component';
+import { UsersComponent } from './com/project/components/users/users.component';
+import {CreateCustomerComponent} from './com/project/components/add-data-modal-window/create-customer/create-customer.component';
+import {CreateOrderComponent} from './com/project/components/add-data-modal-window/create-order/create-order.component';
+import {CreateUserComponent} from './com/project/components/add-data-modal-window/create-user/create-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     LoginSignUpWindowComponent,
-    GrumatoViewComponent
+    GrumatoViewComponent,
+    CustomersComponent,
+    OrdersComponent,
+    UsersComponent,
+    CreateCustomerComponent,
+    CreateOrderComponent,
+    CreateUserComponent
 ],
   imports: [
     BrowserModule,
@@ -48,6 +60,7 @@ import {GrumatoViewComponent} from './com/project/components/grumato-view/grumat
     NbRouteTabsetModule,
     NbInputModule,
     NbButtonModule,
+    NbTreeGridModule,
     StoreModule.forRoot(appReducers),
     NbToastrModule.forRoot(),
     EffectsModule.forRoot([LoginPageEffect])

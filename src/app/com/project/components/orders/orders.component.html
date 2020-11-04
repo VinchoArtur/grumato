@@ -1,0 +1,51 @@
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-md-10">
+        <button nbButton status="success" (click)="onAddOrder()">Добавить заказ</button>
+      </div>
+      <div class="col-md-2">
+        <button nbButton status="info" class="float-right" (click)="onSave()">Сохранить</button>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <ul>
+      <li *ngFor="let dataUser of orders">
+        <nb-card style="border: 1px solid aquamarine">
+          <nb-card-header>
+            <div class="row">
+              <div class="col-md-10">
+                {{dataUser.name}} - {{dataUser.Customer}}
+              </div>
+              <div class="col-md-2">
+                <button nbButton status="danger" class="float-right" (click)="onDelete(dataUser)">Удалить</button>
+              </div>
+            </div>
+          </nb-card-header>
+          <nb-card-body>
+            <div class="row">
+              <div class="col-md-3">
+                <label for="orderName" class="label">Проект: </label>
+                <input type="text" id="orderName" nbInput value="{{dataUser.name}}">
+              </div>
+              <div class="col-md-3">
+                <label for="orderCustomer" class="label">Заказчик: </label>
+                <input type="text" id="orderCustomer" nbInput value="{{dataUser.Customer}}">
+              </div>
+              <div class="col-md-3">
+                <label for="orderDeveloper" class="label">Разработчик: </label>
+                <input type="text" id="orderDeveloper" nbInput value="{{dataUser.Developer}}">
+              </div>
+              <div class="col-md-3">
+                <label for="orderTime" class="label">Время выделеное на проект: </label>
+                <input type="text" id="orderTime" nbInput value="{{dataUser.Time}}">
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </li>
+    </ul>
+
+  </nb-card-body>
+</nb-card>
