@@ -1,0 +1,9 @@
+.login_button {
+  position: relative;
+  left: 5em;
+}
+
+.login_input{
+  display: block;
+  margin-bottom: 2rem;
+}

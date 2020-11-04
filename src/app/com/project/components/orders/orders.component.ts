@@ -4,6 +4,7 @@ import {UsersEntry} from '../component-models/users-model/user.model';
 import {OrderEntry} from '../component-models/orders-model/order.model';
 import {Store} from '@ngrx/store';
 import {HttpService} from '../../services/http.service';
+import {CreateOrderComponent} from '../add-data-modal-window/create-order/create-order.component';
 
 @Component({
   selector: 'app-orders',
@@ -19,7 +20,7 @@ export class OrdersComponent implements OnInit {
   dataSource: NbTreeGridDataSource<UsersEntry>;
 
   // orders$ = this.store.pipe(select(selectOrders));
-  orders: OrderEntry[];
+  orders: OrderEntry[] = [];
   orderName: string = '';
   orderCustomer: string = '';
   orderDeveloper: string = '';
@@ -58,20 +59,19 @@ export class OrdersComponent implements OnInit {
 
 
   onAddOrder() {
-    // this.dialogService.open(AddingOrderComponent).onClose.subscribe(value => {
-    //   for (let order of this.orders) {
-    //     if (order.name == value.name) {
-    //       this.toast.danger("Такой заказ существует", "Внимание");
-    //       return;
-    //     }
-    //   }
-    //   this.orders.push(
-    //     {name: value.name, Customer: value.Customer, Developer: value.Developer, Time: value.Time, Pay: value.Pay}
-    //   );
-    //   this.cdr.detectChanges();
-    //   this.postService.postOrders(this.orders).subscribe(value => console.log(value));
-    // });
-
+    this.dialogService.open(CreateOrderComponent).onClose.subscribe(value => {
+      for (let order of this.orders) {
+        if (order.name == value.name) {
+          this.toast.danger("Такой заказ существует", "Внимание");
+          return;
+        }
+      }
+      this.orders.push(
+        {name: value.name, Customer: value.Customer, Developer: value.Developer, Time: value.Time, Pay: value.Pay}
+      );
+      this.cdr.detectChanges();
+      this.postService.postOrders(this.orders).subscribe(value => console.log(value));
+    });
   }
 
   onDelete(dataUser: OrderEntry) {
