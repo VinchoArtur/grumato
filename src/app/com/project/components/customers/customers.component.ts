@@ -4,6 +4,7 @@ import {select, Store} from '@ngrx/store';
 import {HttpService} from '../../services/http.service';
 import {CustomerEntry} from '../component-models/customers-model/customer.model';
 import {SaveCustomers} from '../components-store/components.action';
+import {CreateCustomerComponent} from '../add-data-modal-window/create-customer/create-customer.component';
 
 @Component({
   selector: 'app-customers',
@@ -60,22 +61,21 @@ export class CustomersComponent implements OnInit {
 
 
   onAddCustomer() {
-    // this.dialogService.open(AddingCustomerComponent).onClose.subscribe(value => {
-    //   for (let order of this.customers) {
-    //     if (order.name == value.name) {
-    //       this.toast.danger("Такой заказчик существует", "Внимание");
-    //       return;
-    //     }
-    //   }
-    //   this.customers.push(
-    //     {name: value.name, Order: value.Order, CompanyName: value.CompanyName, Pay: value.Pay}
-    //   );
-    //   this.cdr.detectChanges();
-    //   this.postService.postCustomer(this.customers).subscribe(value => {
-    //     console.log(value);
-    //   });
-    // });
-
+    this.dialogService.open(CreateCustomerComponent).onClose.subscribe(value => {
+      for (let order of this.customers) {
+        if (order.name == value.name) {
+          this.toast.danger("Такой заказчик существует", "Внимание");
+          return;
+        }
+      }
+      this.customers.push(
+        {name: value.name, Order: value.Order, CompanyName: value.CompanyName, Pay: value.Pay}
+      );
+      this.cdr.detectChanges();
+      this.postService.postCustomer(this.customers).subscribe(value => {
+        console.log(value);
+      });
+    });
   }
 
   onDelete(dataUser: CustomerEntry) {

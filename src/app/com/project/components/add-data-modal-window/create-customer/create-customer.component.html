@@ -1,1 +1,19 @@
-<p>create-customer works!</p>
+<div class="col-md-12">
+  <nb-card>
+    <nb-card-header>Customer</nb-card-header>
+    <nb-card-body>
+      <input type="text" nbInput class="login_input" placeholder="please enter name" [(ngModel)]="this.name">
+      <input type="text" nbInput class="login_input" placeholder="please enter order" [(ngModel)]="this.Order">
+      <input type="text" nbInput class="login_input" placeholder="please enter company name" [(ngModel)]="this.CompanyName">
+      <input type="text" nbInput class="login_input" placeholder="please enter pay" [(ngModel)]="this.Pay">
+      <div class="row">
+        <div class="col-md-2">
+          <button nbButton status="info"  (click)="submit()">ok</button>
+        </div>
+        <div class="col-md-4">
+          <button nbButton status="danger" class="login_button" (click)="cancel()">cancel</button>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
