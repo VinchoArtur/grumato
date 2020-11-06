@@ -49,10 +49,6 @@ export class UsersComponent implements OnInit {
 
   onSave(){
     console.log(this.users);
-    this.toast.success("Сохранено", "Сохранение");
-    this.postService.postUsers(this.users).subscribe(value => {
-      console.log(value);
-    });
     // this.store.dispatch(new SaveUsers(this.users));
   }
 
@@ -62,9 +58,8 @@ export class UsersComponent implements OnInit {
     this.dialogService.open(CreateUserComponent).onClose.subscribe(value => {
       let newUser:UsersEntry = {
         name: value.name,
-        Command: value.command,
-        Group: value.group,
-        Project: value.project
+        direction: value.direction,
+        patronymic:
       };
       for (let user of this.users) {
         if (user.name == newUser.name) {

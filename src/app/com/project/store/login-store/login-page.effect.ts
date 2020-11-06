@@ -7,6 +7,7 @@ import {AppGrumatoState} from '../app-grumato.state';
 import {LoginPageActions, LoginUser, SignUpUser} from './login-page.actions';
 import {map} from 'rxjs/operators';
 import {HttpService} from '../../services/http.service';
+import {EEditorActions, SaveCustomers, SaveOrders, SaveUsers} from '../../components/components-store/components.action';
 
 @Injectable()
 export class LoginPageEffect {
@@ -44,6 +45,66 @@ export class LoginPageEffect {
           this.toastrService.danger(
             'Error',
             'Authorisation'
+          );
+        }
+      });
+    })
+  );
+
+  @Effect({dispatch: false})
+  addCustomer$ = this.actions$.pipe(
+    ofType<SaveCustomers>(EEditorActions.SaveCustomers),
+    map((action) => {
+      this.httpServie.postCustomer(action.payload).subscribe(value => {
+        if ( (value as {status: string, code: string}).status == 'success') {
+          this.toastrService.success(
+            'Done',
+            'Creating'
+          );
+        } else {
+          this.toastrService.danger(
+            'Error',
+            'Creating'
+          );
+        }
+      });
+    })
+  );
+
+  @Effect({dispatch: false})
+  addOrders$ = this.actions$.pipe(
+    ofType<SaveOrders>(EEditorActions.SaveOrders),
+    map((action) => {
+      this.httpServie.postOrders(action.payload).subscribe(value => {
+        if ( (value as {status: string, code: string}).status == 'success') {
+          this.toastrService.success(
+            'Done',
+            'Creating'
+          );
+        } else {
+          this.toastrService.danger(
+            'Error',
+            'Creating'
+          );
+        }
+      });
+    })
+  );
+
+  @Effect({dispatch: false})
+  addUsers$ = this.actions$.pipe(
+    ofType<SaveUsers>(EEditorActions.SaveUsers),
+    map((action) => {
+      this.httpServie.postUsers(action.payload).subscribe(value => {
+        if ( (value as {status: string, code: string}).status == 'success') {
+          this.toastrService.success(
+            'Done',
+            'Creating'
+          );
+        } else {
+          this.toastrService.danger(
+            'Error',
+            'Creating'
           );
         }
       });

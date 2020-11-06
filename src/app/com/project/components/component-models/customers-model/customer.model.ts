@@ -1,6 +1,9 @@
 export interface CustomerEntry {
+  surname: string;
   name: string;
-  Order: string;
-  CompanyName: string;
-  Pay: string;
+  patronymic: string;
+  customercol: string;
+  company: string;
+  companyNumber: string;
+  id: number;
 }

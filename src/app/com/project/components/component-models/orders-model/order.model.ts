@@ -1,7 +1,8 @@
 export interface OrderEntry {
-  name: string;
-  Customer: string;
-  Developer: string;
-  Time: string;
-  Pay: string;
+  orderDescription: string;
+  customerCode: string;
+  developer: string;
+  time: string;
+  productCode: number;
+  orderCost: string;
 }

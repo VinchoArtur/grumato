@@ -4,16 +4,16 @@ import {OrderEntry} from '../component-models/orders-model/order.model';
 import {CustomerEntry} from '../component-models/customers-model/customer.model';
 
 export enum EEditorActions {
-  SaveUsers = "[Editor] Save users",
-  SaveOrders = "[Editor] Save orders",
   SaveCustomers = "[Editor] Save customers",
+  SaveOrders = "[Editor] Save orders",
+  SaveUsers = "[Editor] Save users",
 }
 
 
 
-export class SaveUsers implements Action {
-  public readonly type = EEditorActions.SaveUsers;
-  constructor(public payload: UsersEntry[]){
+export class SaveCustomers implements Action {
+  public readonly type = EEditorActions.SaveCustomers;
+  constructor(public payload: CustomerEntry[]){
     console.log(payload);
   }
 }
@@ -25,9 +25,9 @@ export class SaveOrders implements Action {
   }
 }
 
-export class SaveCustomers implements Action {
-  public readonly type = EEditorActions.SaveCustomers;
-  constructor(public payload: CustomerEntry[]){
+export class SaveUsers implements Action {
+  public readonly type = EEditorActions.SaveUsers;
+  constructor(public payload: UsersEntry[]){
     console.log(payload);
   }
 }
