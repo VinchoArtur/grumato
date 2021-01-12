@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {NbDialogService, NbToastrService, NbTreeGridDataSource, NbTreeGridDataSourceBuilder} from '@nebular/theme';
-import {UsersEntry} from '../component-models/users-model/user.model';
+import {Employees} from '../component-models/users-model/user.model';
 import {OrderEntry} from '../component-models/orders-model/order.model';
 import {Store} from '@ngrx/store';
 import {HttpService} from '../../services/http.service';
@@ -17,7 +17,7 @@ export class OrdersComponent implements OnInit {
   defaultColumns = ['Customer', 'Developer', 'Time', 'Pay'];
   allColumns = [this.customColumn, ...this.defaultColumns];
 
-  dataSource: NbTreeGridDataSource<UsersEntry>;
+  dataSource: NbTreeGridDataSource<Employees>;
 
   // orders$ = this.store.pipe(select(selectOrders));
   orders: OrderEntry[] = [{
@@ -35,7 +35,7 @@ export class OrdersComponent implements OnInit {
   productCode: string = '';
   orderCost: string = '';
 
-  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<UsersEntry>,
+  constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<Employees>,
               private dialogService: NbDialogService,
               private cdr: ChangeDetectorRef,
               // private store: Store<AppState>,

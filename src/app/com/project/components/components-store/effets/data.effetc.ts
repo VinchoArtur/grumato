@@ -5,10 +5,16 @@ import {AppGrumatoState} from '../../../store/app-grumato.state';
 import {Router} from '@angular/router';
 import {HttpService} from '../../../services/http.service';
 import {NbToastrService} from '@nebular/theme';
-import {map, switchMap} from 'rxjs/operators';
-import {EEditorActions, GetCustomers, GetOrders, GetUsers, SaveCustomers, SaveOrders, SaveUsers, UsersLoaded} from '../components.action';
-import {UsersEntry} from '../../component-models/users-model/user.model';
-import {of} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {
+  EEditorActions,
+  GetCustomers,
+  GetOrders,
+  GetUsers,
+  SaveCustomers,
+  SaveOrders,
+  SaveUsers
+} from '../components.action';
 
 @Injectable()
 export class DataEffect {
@@ -18,8 +24,7 @@ export class DataEffect {
   constructor(private actions$: Actions,
               private store: Store<AppGrumatoState>,
               private router: Router,
-              private httpService: HttpService,
-              private toasterService: NbToastrService) {
+              private httpService: HttpService) {
   }
 
 
@@ -59,10 +64,10 @@ export class DataEffect {
   getUsers$ = this.actions$.pipe(
     ofType<GetUsers>(EEditorActions.GetUsers),
     map((action) => {
-      this.httpService.getUsers(action.payload);
+      this.httpService.getUsers();
     })
     // switchMap(() => this.httpService.getUsers(this.users)),
-    // switchMap((users: UsersEntry[]) => of(
+    // switchMap((users: Employees[]) => of(
     //   new UsersLoaded(users)
     // ))
   );

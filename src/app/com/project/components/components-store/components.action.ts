@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {UsersEntry} from '../component-models/users-model/user.model';
+import {Employees} from '../component-models/users-model/user.model';
 import {OrderEntry} from '../component-models/orders-model/order.model';
 import {CustomerEntry} from '../component-models/customers-model/customer.model';
 
@@ -42,20 +42,19 @@ export class SaveOrders implements Action {
 
 export class GetUsers implements Action {
   public readonly type = EEditorActions.GetUsers;
-  constructor(public payload: UsersEntry[]){
+  constructor(public payload: Employees[]){
     console.log(payload);
   }
 }
 export class SaveUsers implements Action {
   public readonly type = EEditorActions.SaveUsers;
-  constructor(public payload: UsersEntry[]){
-    console.log(payload);
+  constructor(public payload: Employees){
   }
 }
 
 export class UsersLoaded implements Action {
   public readonly type = EEditorActions.UserLoaded;
-  constructor(public payload: UsersEntry[]) {}
+  constructor(public payload: Employees[]) {}
 }
 
 export type EditorAction =
