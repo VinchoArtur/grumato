@@ -1,8 +1,8 @@
 export interface OrderEntry {
   orderDescription: string;
   customerCode: string;
-  developer: string;
-  time: string;
-  productCode: number;
+  dateOfReceiptOfOrder: string;
+  orderExecutionDate: string;
+  productCode: string;
   orderCost: string;
 }

@@ -5,5 +5,4 @@ export interface CustomerEntry {
   customercol: string;
   company: string;
   companyNumber: string;
-  id: number;
 }

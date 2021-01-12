@@ -4,9 +4,9 @@
       <div class="col-md-10">
         <button nbButton status="success" (click)="onAddOrder()">Добавить заказ</button>
       </div>
-      <div class="col-md-2">
-        <button nbButton status="info" class="float-right" (click)="onSave()">Сохранить</button>
-      </div>
+<!--      <div class="col-md-2">-->
+<!--        <button nbButton status="info" class="float-right" (click)="onSave()">Сохранить</button>-->
+<!--      </div>-->
     </div>
   </nb-card-header>
   <nb-card-body>
@@ -16,7 +16,7 @@
           <nb-card-header>
             <div class="row">
               <div class="col-md-10">
-                {{dataUser.name}} - {{dataUser.Customer}}
+                {{dataUser.orderDescription}} - {{dataUser.productCode}}
               </div>
               <div class="col-md-2">
                 <button nbButton status="danger" class="float-right" (click)="onDelete(dataUser)">Удалить</button>
@@ -25,21 +25,40 @@
           </nb-card-header>
           <nb-card-body>
             <div class="row">
-              <div class="col-md-3">
-                <label for="orderName" class="label">Проект: </label>
-                <input type="text" id="orderName" nbInput value="{{dataUser.name}}">
+              <div class="col-md-2">
+                <label for="orderDescription" class="label">Направление заказа: </label>
+                <input type="text" id="orderDescription" nbInput value="{{dataUser.orderDescription}}">
               </div>
-              <div class="col-md-3">
-                <label for="orderCustomer" class="label">Заказчик: </label>
-                <input type="text" id="orderCustomer" nbInput value="{{dataUser.Customer}}">
+              <div class="col-md-2">
+                <label for="customerCode" class="label">Код заказчика: </label>
+                <input type="text" id="customerCode" nbInput value="{{dataUser.customerCode}}">
               </div>
-              <div class="col-md-3">
-                <label for="orderDeveloper" class="label">Разработчик: </label>
-                <input type="text" id="orderDeveloper" nbInput value="{{dataUser.Developer}}">
+              <div class="col-md-2">
+                <label for="dateOfReceiptOfOrder" class="label">Время получения заказа: </label>
+<!--                <input type="text" id="dateOfReceiptOfOrder" nbInput value="{{dataUser.dateOfReceiptOfOrder}}">-->
+                <input id="dateOfReceiptOfOrder" nbInput placeholder="dateOfReceiptOfOrder" [nbDatepicker]="dateOfReceiptOfOrder" value="{{dataUser.dateOfReceiptOfOrder}}">
+                <nb-datepicker #dateOfReceiptOfOrder></nb-datepicker>
+
+<!--                <dp-date-picker class="login_date_picker" id="dateOfReceiptOfOrder" placeholder="please enter dateOfReceiptOfOrder"  format="DD-MM-YYYY" [(ngModel)]="this.dateOfReceiptOfOrder" value="{{dataUser.dateOfReceiptOfOrder}}"></dp-date-picker>-->
+
               </div>
-              <div class="col-md-3">
-                <label for="orderTime" class="label">Время выделеное на проект: </label>
-                <input type="text" id="orderTime" nbInput value="{{dataUser.Time}}">
+              <div class="col-md-2">
+                <label for="orderExecutionDate" class="label">Время исполнения заказа: </label>
+<!--                <input type="text" id="orderExecutionDate" nbInput value="{{dataUser.orderExecutionDate}}">-->
+                <input id="orderExecutionDate" nbInput placeholder="Form Picker" [nbDatepicker]="orderExecutionDate" value="{{dataUser.orderExecutionDate}}">
+                <nb-datepicker #orderExecutionDate></nb-datepicker>
+
+<!--                <dp-date-picker class="login_date_picker" id="orderExecutionDate" placeholder="please enter orderExecutionDate" format="DD-MM-YYYY" [(ngModel)]="this.orderExecutionDate" value="{{dataUser.orderExecutionDate}}"></dp-date-picker>-->
+
+
+              </div>
+              <div class="col-md-2">
+                <label for="productCode" class="label">Код продукта: </label>
+                <input type="text" id="productCode" nbInput value="{{dataUser.productCode}}">
+              </div>
+              <div class="col-md-2">
+                <label for="orderCost" class="label">Цена заказа: </label>
+                <input type="text" id="orderCost" nbInput value="{{dataUser.orderCost}}">
               </div>
             </div>
           </nb-card-body>

@@ -7,18 +7,22 @@ import {NbDialogRef} from '@nebular/theme';
   styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent implements OnInit {
+  surname:string;
   name: string;
-  command: string;
-  group: string;
-  project: string;
+  patronymic: string;
+  phoneNumber: string;
+  direction: string;
+  role: string;
 
   constructor(protected ref: NbDialogRef<CreateUserComponent>) { }
 
   ngOnInit(): void {
+    this.surname = '';
     this.name = '';
-    this.command = '';
-    this.group = '';
-    this.project = '';
+    this.patronymic = '';
+    this.phoneNumber = '';
+    this.direction = '';
+    this.role = '';
   }
   cancel() {
     this.ref.close(false)
@@ -26,10 +30,12 @@ export class CreateUserComponent implements OnInit {
 
   submit() {
     this.ref.close({
+      surname: this.surname,
       name: this.name,
-      command: this.command,
-      group: this.group,
-      project: this.project
+      patronymic: this.patronymic,
+      phoneNumber: this.phoneNumber,
+      direction: this.direction,
+      role: this.role
     })
   }
 }

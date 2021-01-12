@@ -2,10 +2,12 @@
   <nb-card>
     <nb-card-header>Customer</nb-card-header>
     <nb-card-body>
+      <input type="text" nbInput class="login_input" placeholder="please enter surname" [(ngModel)]="this.surname">
       <input type="text" nbInput class="login_input" placeholder="please enter name" [(ngModel)]="this.name">
-      <input type="text" nbInput class="login_input" placeholder="please enter order" [(ngModel)]="this.Order">
-      <input type="text" nbInput class="login_input" placeholder="please enter company name" [(ngModel)]="this.CompanyName">
-      <input type="text" nbInput class="login_input" placeholder="please enter pay" [(ngModel)]="this.Pay">
+      <input type="text" nbInput class="login_input" placeholder="please enter patronymic" [(ngModel)]="this.patronymic">
+      <input type="text" nbInput class="login_input" placeholder="please enter customercol" [(ngModel)]="this.customercol">
+      <input type="text" nbInput class="login_input" placeholder="please enter company" [(ngModel)]="this.company">
+      <input type="text" nbInput class="login_input" placeholder="please enter companyNumber" [(ngModel)]="this.companyNumber">
       <div class="row">
         <div class="col-md-2">
           <button nbButton status="info"  (click)="submit()">ok</button>

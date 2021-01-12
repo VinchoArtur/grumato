@@ -4,4 +4,5 @@ export interface UsersEntry {
   patronymic: string;
   phoneNumber: string;
   direction: string;
+  role: string;
 }

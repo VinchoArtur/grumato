@@ -5,6 +5,7 @@ import {HttpService} from '../../services/http.service';
 import {CustomerEntry} from '../component-models/customers-model/customer.model';
 import {SaveCustomers} from '../components-store/components.action';
 import {CreateCustomerComponent} from '../add-data-modal-window/create-customer/create-customer.component';
+import {OrderEntry} from '../component-models/orders-model/order.model';
 
 @Component({
   selector: 'app-customers',
@@ -21,12 +22,21 @@ export class CustomersComponent implements OnInit {
 
 
   // customers$ = this.store.pipe(select(selectCustomers));
-  customers: CustomerEntry[] = [];
+  customers: CustomerEntry[] = [{
+    surname: 'test',
+    name: 'test',
+    patronymic: 'test',
+    customercol: 'test',
+    company: 'test',
+    companyNumber: 'test',
+  }];
   data = [];
-  customerName: string = '';
-  customerOrder: string = '';
-  customerCompany: string = '';
-  customerPay: string = '';
+  surname: string = '';
+  name: string = '';
+  patronymic: string = '';
+  customercol: string = '';
+  company: string = '';
+  companyNumber: string = '';
 
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<CustomerEntry>,
               private dialogService: NbDialogService,
@@ -38,17 +48,18 @@ export class CustomersComponent implements OnInit {
     //   this.customers = (customers as CustomerEntry[]);
     // });
 
-    if (this.customers.length > 0) {
-      for (let customer of this.customers) {
-        this.customerName = customer.name;
-        this.customerOrder = customer.Order;
-        this.customerCompany = customer.CompanyName;
-        this.customerPay = customer.Pay;
-      }
-    }
+    // if (this.customers.length > 0) {
+    //   for (let customer of this.customers) {
+    //     this.customerName = customer.name;
+    //     this.customerOrder = customer.Order;
+    //     this.customerCompany = customer.CompanyName;
+    //     this.customerPay = customer.Pay;
+    //   }
+    // }
   }
 
   ngOnInit(): void {
+    this.postService.getCustomers(this.customers).subscribe(value => console.log(value));
   }
 
   onSave() {
@@ -62,14 +73,28 @@ export class CustomersComponent implements OnInit {
 
   onAddCustomer() {
     this.dialogService.open(CreateCustomerComponent).onClose.subscribe(value => {
+      let newCustomer:CustomerEntry = {
+        surname: value.surname,
+        name: value.name,
+        patronymic: value.patronymic,
+        customercol: value.customercol,
+        company: value.company,
+        companyNumber: value.companyNumber
+      };
       for (let order of this.customers) {
-        if (order.name == value.name) {
+        if (order.name == newCustomer.name) {
+          // ToDo change to filter in backend part
           this.toast.danger("Такой заказчик существует", "Внимание");
           return;
         }
       }
       this.customers.push(
-        {name: value.name, Order: value.Order, CompanyName: value.CompanyName, Pay: value.Pay}
+        {surname: value.surname,
+          name: value.name,
+          patronymic: value.patronymic,
+          customercol: value.customercol,
+          company: value.company,
+          companyNumber: value.companyNumber}
       );
       this.cdr.detectChanges();
       this.postService.postCustomer(this.customers).subscribe(value => {

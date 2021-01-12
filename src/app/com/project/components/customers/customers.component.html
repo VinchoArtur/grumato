@@ -4,9 +4,9 @@
       <div class="col-md-10">
         <button nbButton status="success" (click)="onAddCustomer()">Добавить заказчика</button>
       </div>
-      <div class="col-md-2">
-        <button nbButton status="info" class="float-right" (click)="onSave()">Сохранить</button>
-      </div>
+<!--      <div class="col-md-2">-->
+<!--        <button nbButton status="info" class="float-right" (click)="onSave()">Сохранить</button>-->
+<!--      </div>-->
     </div>
   </nb-card-header>
   <nb-card-body>
@@ -16,7 +16,7 @@
           <nb-card-header>
             <div class="row">
               <div class="col-md-10">
-                {{dataUser.Order}} - {{dataUser.name}}
+                {{dataUser.surname}} - {{dataUser.name}}
               </div>
               <div class="col-md-2">
                 <button nbButton status="danger" class="float-right" (click)="onDelete(dataUser)">Удалить</button>
@@ -26,21 +26,29 @@
 
           <nb-card-body>
             <div class="row">
-              <div class="col-md-3">
-                <label for="customerName" class="label">Заказчик: </label>
-                <input type="text" id="customerName" nbInput value="{{dataUser.name}}">
+              <div class="col-md-2">
+                <label for="surname" class="label">Фамилия: </label>
+                <input type="text" id="surname" nbInput value="{{dataUser.surname}}">
               </div>
-              <div class="col-md-3">
-                <label for="customerOrder" class="label">Название проекта: </label>
-                <input type="text" id="customerOrder" nbInput value="{{dataUser.Order}}">
+              <div class="col-md-2">
+                <label for="name" class="label">Имя: </label>
+                <input type="text" id="name" nbInput value="{{dataUser.name}}">
               </div>
-              <div class="col-md-3">
-                <label for="customerCompany" class="label">Название компании: </label>
-                <input type="text" id="customerCompany" nbInput value="{{dataUser.CompanyName}}">
+              <div class="col-md-2">
+                <label for="patronymic" class="label">Отчество: </label>
+                <input type="text" id="patronymic" nbInput value="{{dataUser.patronymic}}">
               </div>
-              <div class="col-md-3">
-                <label for="customerPay" class="label">Рэйт: </label>
-                <input type="text" id="customerPay" nbInput value="{{dataUser.Pay}}">
+              <div class="col-md-2">
+                <label for="customercol" class="label">Количество заказчиков: </label>
+                <input type="text" id="customercol" nbInput value="{{dataUser.customercol}}">
+              </div>
+              <div class="col-md-2">
+                <label for="company" class="label">Компания: </label>
+                <input type="text" id="company" nbInput value="{{dataUser.company}}">
+              </div>
+              <div class="col-md-2">
+                <label for="companyNumber" class="label">Номер компании: </label>
+                <input type="text" id="companyNumber" nbInput value="{{dataUser.companyNumber}}">
               </div>
             </div>
           </nb-card-body>

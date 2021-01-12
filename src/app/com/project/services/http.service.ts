@@ -5,11 +5,14 @@ import {LoginModel} from '../login/login-model/login.model';
 import {UsersEntry} from '../components/component-models/users-model/user.model';
 import {OrderEntry} from '../components/component-models/orders-model/order.model';
 import {CustomerEntry} from '../components/component-models/customers-model/customer.model';
+import {NbToastrService} from '@nebular/theme';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class HttpService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private toasterService: NbToastrService) {
   }
 
   getUserData() {
@@ -45,6 +48,15 @@ export class HttpService {
 
 
 
+  getCustomers(customer: CustomerEntry[]){
+    let body = {
+      customerEntry: customer
+    };
+    let value = JSON.stringify(body);
+    console.log("getCustomers");
+    console.log(value);
+    return this.http.get("http://localhost:8080/customers", {headers: {"Content-type": "application/json"}})
+  }
   postCustomer(customer: CustomerEntry[]) {
     let body = {
       customerEntry: customer
@@ -64,6 +76,15 @@ export class HttpService {
     return this.http.post("http://localhost:8080/customers/delete", s, {headers: {"Content-type": "application/json"}})
   }
 
+  getOrders(order: OrderEntry[]){
+    let body = {
+      orderEntry: order
+    };
+    let value = JSON.stringify(body);
+    console.log("getOrders");
+    console.log(value);
+    return this.http.get("http://localhost:8080/orders", {headers: {"Content-type": "application/json"}})
+  }
   postOrders(order: OrderEntry[]) {
     let body = {
       orderEntry: order
@@ -84,6 +105,15 @@ export class HttpService {
     return this.http.post("http://localhost:8080/orders/delete", s, {headers: {"Content-type": "application/json"}})
   }
 
+  getUsers(user: UsersEntry[]): Observable<UsersEntry[]>{
+    let body = {
+      userEntry: user
+    };
+    let value = JSON.stringify(body);
+    console.log("getUsers");
+    console.log(value);
+    return this.http.get("http://localhost:8080/users", {headers: {"Content-type": "application/json"}}) as Observable<UsersEntry[]>;
+  }
   postUsers(user:UsersEntry[]) {
     let body = {
       userEntry: user

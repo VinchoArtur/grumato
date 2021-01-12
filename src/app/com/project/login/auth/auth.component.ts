@@ -27,9 +27,29 @@ export class AuthComponent implements OnInit {
    */
   password: string;
 
+  loading: boolean;
+
   ngOnInit(): void {
   }
 
+
+  open() {
+    let userLogin: string = '';
+    let userPassword: string = '';
+    this.dialogService.open(LoginSignUpWindowComponent, {
+      context: {},
+    }).onClose.subscribe(value => {
+      if (value) {
+        userLogin = value.name;
+        userPassword = value.password;
+        this.store.dispatch(new SignUpUser({
+          userName: userLogin,
+          password: userPassword
+        }));
+      }
+    }).add();
+
+  }
 
   onSubmit() {
     // this.store.dispatch(new LoginUser({
@@ -37,6 +57,9 @@ export class AuthComponent implements OnInit {
     //   password: this.password,
     //   userId: 111
     // }));
+
+    this.loading = true;
+    setTimeout(() => this.loading = false, 3000);
 
     if (this.userName && this.password) {
       this.store.dispatch(new LoginUser({
@@ -61,24 +84,6 @@ export class AuthComponent implements OnInit {
 
   isPassword(): boolean {
     return !this.password;
-  }
-
-  open() {
-    let userLogin: string = '';
-    let userPassword: string = '';
-    this.dialogService.open(LoginSignUpWindowComponent, {
-      context: {},
-    }).onClose.subscribe(value => {
-      if (value) {
-       userLogin = value.name;
-       userPassword = value.password;
-        this.store.dispatch(new SignUpUser({
-          userName: userLogin,
-          password: userPassword
-        }));
-      }
-    }).add();
-
   }
 
 }

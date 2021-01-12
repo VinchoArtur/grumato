@@ -2,11 +2,24 @@
   <nb-card>
     <nb-card-header>Order</nb-card-header>
     <nb-card-body>
-      <input type="text" nbInput class="login_input" placeholder="please enter name" [(ngModel)]="this.name">
-      <input type="text" nbInput class="login_input" placeholder="please enter customer" [(ngModel)]="this.Customer">
-      <input type="text" nbInput class="login_input" placeholder="please enter developer" [(ngModel)]="this.Developer">
-      <input type="text" nbInput class="login_input" placeholder="please enter time" [(ngModel)]="this.Time">
-      <input type="text" nbInput class="login_input" placeholder="please enter pay" [(ngModel)]="this.Pay">
+      <input type="text" nbInput class="login_input" placeholder="please enter orderDescription" [(ngModel)]="this.orderDescription">
+      <input type="text" nbInput class="login_input" placeholder="please enter customerCode" [(ngModel)]="this.customerCode">
+<!--      <input type="text" nbInput class="login_input" placeholder="please enter dateOfReceiptOfOrder" [(ngModel)]="this.dateOfReceiptOfOrder" [nbDatepicker]="dateTimePicker1">-->
+<!--      <nb-calendar [date]="date" (dateChange)="handleDateChange($event)"></nb-calendar>-->
+
+      <input nbInput class="login_input" placeholder="please enter dateOfReceiptOfOrder" [(ngModel)]="this.dateOfReceiptOfOrder" [dpDayPicker]="config">
+
+<!--      <dp-date-picker class="login_date_picker" placeholder="please enter dateOfReceiptOfOrder"  format="DD-MM-YYYY" [(ngModel)]="this.dateOfReceiptOfOrder"></dp-date-picker>-->
+
+<!--      <input type="text" nbInput class="login_input" placeholder="please enter orderExecutionDate" [(ngModel)]="this.orderExecutionDate" [nbDatepicker]="dateTimePicker2">-->
+<!--      <nb-calendar [date]="date" (dateChange)="handleDateChange($event)"></nb-calendar>-->
+
+      <input nbInput class="login_input" placeholder="please enter orderExecutionDate" [(ngModel)]="this.orderExecutionDate" [dpDayPicker]="config">
+
+<!--      <dp-date-picker class="login_date_picker" placeholder="please enter orderExecutionDate" format="DD-MM-YYYY" [(ngModel)]="this.orderExecutionDate"></dp-date-picker>-->
+
+      <input type="text" nbInput class="login_input" placeholder="please enter productCode" [(ngModel)]="this.productCode">
+      <input type="text" nbInput class="login_input" placeholder="please enter orderCost" [(ngModel)]="this.orderCost">
       <div class="row">
         <div class="col-md-2">
           <button nbButton status="info"  (click)="submit()">ok</button>

@@ -7,18 +7,22 @@ import {NbDialogRef} from '@nebular/theme';
   styleUrls: ['./create-customer.component.css']
 })
 export class CreateCustomerComponent implements OnInit {
+  surname: string;
   name: string;
-  Order: string;
-  CompanyName: string;
-  Pay: string;
+  patronymic: string;
+  customercol: string;
+  company: string;
+  companyNumber: string;
 
   constructor(protected ref: NbDialogRef<CreateCustomerComponent>) { }
 
   ngOnInit() {
-    this.name = '';
-    this.Order = '';
-    this.CompanyName = '';
-    this.Pay = '';
+    this.surname= '';
+    this.name= '';
+    this.patronymic= '';
+    this.customercol= '';
+    this.company= '';
+    this.companyNumber= '';
   }
 
   cancel() {
@@ -27,10 +31,12 @@ export class CreateCustomerComponent implements OnInit {
 
   submit() {
     this.ref.close({
+      surname: this.surname,
       name: this.name,
-      Order: this.Order,
-      CompanyName: this.CompanyName,
-      Pay: this.Pay,
+      patronymic: this.patronymic,
+      customercol: this.customercol,
+      company: this.company,
+      companyNumber: this.companyNumber,
     })
   }
 

@@ -7,20 +7,26 @@ import {NbDialogRef} from '@nebular/theme';
   styleUrls: ['./create-order.component.css']
 })
 export class CreateOrderComponent implements OnInit {
-  name: string;
-  Customer: string;
-  Developer: string;
-  Time: string;
-  Pay: string;
+  orderDescription: string;
+  customerCode: string;
+  dateOfReceiptOfOrder: Date;
+  orderExecutionDate: Date;
+  productCode: string;
+  orderCost: string;
+  date: Date = new Date();
+  datePickerConfig: any;
+  selectedDate: any;
+  config: any;
 
   constructor(protected ref: NbDialogRef<CreateOrderComponent>) { }
 
   ngOnInit() {
-    this.name = '';
-    this.Customer = '';
-    this.Developer = '';
-    this.Time = '';
-    this.Pay = '';
+    this.orderDescription = '';
+    this.customerCode = '';
+    this.dateOfReceiptOfOrder;
+    this.orderExecutionDate;
+    this.productCode = '';
+    this.orderCost = '';
   }
 
   cancel() {
@@ -29,12 +35,16 @@ export class CreateOrderComponent implements OnInit {
 
   submit() {
     this.ref.close({
-      name: this.name,
-      Customer: this.Customer,
-      Developer: this.Developer,
-      Time: this.Time,
-      Pay: this.Pay,
+      orderDescription: this.orderDescription,
+      customerCode: this.customerCode,
+      dateOfReceiptOfOrder: this.dateOfReceiptOfOrder,
+      orderExecutionDate: this.orderExecutionDate,
+      productCode: this.productCode,
+      orderCost: this.orderCost,
     })
   }
 
+  handleDateChange($event: any) {
+
+  }
 }

@@ -4,9 +4,9 @@
       <div class="col-md-10">
         <button nbButton status="success" (click)="onAddWorker()">Добавить работника</button>
       </div>
-      <div class="col-md-2">
-        <button nbButton status="info" class="float-right" (click)="onSave()">Сохранить</button>
-      </div>
+<!--      <div class="col-md-2">-->
+<!--        <button nbButton status="info" class="float-right" (click)="onSave()">Сохранить</button>-->
+<!--      </div>-->
     </div>
   </nb-card-header>
   <nb-card-body>
@@ -16,7 +16,7 @@
           <nb-card-header>
             <div class="row">
               <div class="col-md-10">
-                {{dataUser.Group}} - {{dataUser.name}}
+                {{dataUser.surname}} - {{dataUser.name}}
               </div>
               <div class="col-md-2">
                 <button nbButton status="danger" class="float-right" (click)="onDelete(dataUser)">Удалить</button>
@@ -25,21 +25,28 @@
           </nb-card-header>
           <nb-card-body>
             <div class="row">
-              <div class="col-md-3">
-                <label for="userName" class="label">Имя: </label>
-                <input type="text" id="userName" nbInput value="{{dataUser.name}}">
+              <div class="col-md-2">
+                <label for="surname" class="label">Фамилия: </label>
+                <input type="text" id="surname" nbInput value="{{dataUser.surname}}">
               </div>
-              <div class="col-md-3">
-                <label for="userGroup" class="label">Позиция: </label>
-                <input type="text" id="userGroup" nbInput value="{{dataUser.Group}}">
+              <div class="col-md-2">
+                <label for="name" class="label">Имя: </label>
+                <input type="text" id="name" nbInput value="{{dataUser.name}}">
               </div>
-              <div class="col-md-3">
-                <label for="userComand" class="label">Команда: </label>
-                <input type="text" id="userComand" nbInput value="{{dataUser.Command}}">
+              <div class="col-md-2">
+                <label for="patronymic" class="label">Отчество: </label>
+                <input type="text" id="patronymic" nbInput value="{{dataUser.patronymic}}">
               </div>
-              <div class="col-md-3">
-                <label for="userProject" class="label">Проект: </label>
-                <input type="text" id="userProject" nbInput value="{{dataUser.Project}}">
+              <div class="col-md-2">
+                <label for="phoneNumber" class="label">Номер телефона: </label>
+                <input type="text" id="phoneNumber" nbInput value="{{dataUser.phoneNumber}}">
+              </div>
+              <div class="col-md-2">
+                <label for="direction" class="label">Направление: </label>
+                <input type="text" id="direction" nbInput value="{{dataUser.direction}}">
+              </div><div class="col-md-2">
+                <label for="direction" class="label">Роль: </label>
+                <input type="text" id="role" nbInput value="{{dataUser.role}}">
               </div>
             </div>
           </nb-card-body>
