@@ -25,7 +25,7 @@ export class HttpService {
         userName: userData.userName,
         userPassword: userData.password
       }
-    }
+    };
     return this.http.post('http://localhost:8080/login/add', {login: {
       userName: userData.userName, userPassword: userData.password
       }})
@@ -37,29 +37,19 @@ export class HttpService {
         userName: loginData.userName,
         userPassword: loginData.password
       }
-    }
+    };
     return this.http.post('http://localhost:8080/login/auth', {login: {
         userName: loginData.userName, userPassword: loginData.password
       }})
   }
 
 
-  //      additionally http ref
-
-
-
-  getCustomers(customer: CustomerEntry[]){
-    let body = {
-      customerEntry: customer
-    };
-    let value = JSON.stringify(body);
-    console.log("getCustomers");
-    console.log(value);
+  getCustomers(){
     return this.http.get("http://localhost:8080/customers", {headers: {"Content-type": "application/json"}})
   }
-  postCustomer(customer: CustomerEntry[]) {
+  postCustomer(customer: CustomerEntry) {
     let body = {
-      customerEntry: customer
+      customer: customer
     };
     let value = JSON.stringify(body);
     console.log("value...");
@@ -75,19 +65,15 @@ export class HttpService {
     console.log(value);
     return this.http.post("http://localhost:8080/customers/delete", s, {headers: {"Content-type": "application/json"}})
   }
-
-  getOrders(order: OrderEntry[]){
-    let body = {
-      orderEntry: order
-    };
-    let value = JSON.stringify(body);
-    console.log("getOrders");
-    console.log(value);
+  //Руки за такаое надо оторвать
+  getOrders(){
     return this.http.get("http://localhost:8080/orders", {headers: {"Content-type": "application/json"}})
   }
-  postOrders(order: OrderEntry[]) {
+
+  //Руки за такаое надо оторвать
+  postOrders(order: OrderEntry) {
     let body = {
-      orderEntry: order
+      order: order
     };
     let value = JSON.stringify(body);
     console.log("value...");
@@ -95,6 +81,7 @@ export class HttpService {
     return this.http.post("http://localhost:8080/orders/add", value, {headers: {"Content-type": "application/json"}})
   }
 
+  //Руки за такаое надо оторвать
   deleteOrder(value: OrderEntry) {
     let body = {
       order: value
@@ -119,7 +106,7 @@ export class HttpService {
 
   deleteUser(value: Employees) {
     let body = {
-      user: value
+      employees: value
     };
     let s = JSON.stringify(body);
     console.log("delete");

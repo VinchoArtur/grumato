@@ -29,6 +29,7 @@
     "@ngrx/store": "8.6.0",
     "@ngx-translate/core": "11.0.1",
     "@ngx-translate/http-loader": "4.0.0",
+    "angular-mydatepicker": "^0.10.3",
     "bootstrap": "^4.5.3",
     "eva-icons": "^1.1.2",
     "ng2-date-picker": "^10.0.1",

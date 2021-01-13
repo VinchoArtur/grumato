@@ -22,7 +22,7 @@ export class GetCustomers implements Action {
 }
 export class SaveCustomers implements Action {
   public readonly type = EEditorActions.SaveCustomers;
-  constructor(public payload: CustomerEntry[]){
+  constructor(public payload: CustomerEntry){
     console.log(payload);
   }
 }
@@ -35,7 +35,7 @@ export class GetOrders implements Action {
 }
 export class SaveOrders implements Action {
   public readonly type = EEditorActions.SaveOrders;
-  constructor(public payload: OrderEntry[]){
+  constructor(public payload: OrderEntry){
     console.log(payload);
   }
 }

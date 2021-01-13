@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NbDialogRef} from '@nebular/theme';
+import {IAngularMyDpOptions, IMyDateModel} from "angular-mydatepicker";
 
 @Component({
   selector: 'app-create-order',
@@ -14,17 +15,26 @@ export class CreateOrderComponent implements OnInit {
   productCode: string;
   orderCost: string;
   date: Date = new Date();
-  datePickerConfig: any;
-  selectedDate: any;
   config: any;
+
+
+  myDpOptions: IAngularMyDpOptions = {
+    dateRange: false,
+    dateFormat: 'dd.mm.yyyy'
+    // other options are here...
+  };
+
+  model: IMyDateModel = null;
+
+
 
   constructor(protected ref: NbDialogRef<CreateOrderComponent>) { }
 
   ngOnInit() {
     this.orderDescription = '';
     this.customerCode = '';
-    this.dateOfReceiptOfOrder;
-    this.orderExecutionDate;
+    this.dateOfReceiptOfOrder = new Date();
+    this.orderExecutionDate = new Date();
     this.productCode = '';
     this.orderCost = '';
   }
@@ -46,5 +56,16 @@ export class CreateOrderComponent implements OnInit {
 
   handleDateChange($event: any) {
 
+  }
+
+  onDateChanged(event: IMyDateModel): void {
+    this.dateOfReceiptOfOrder = event.singleDate.jsDate;
+    this.orderExecutionDate = event.singleDate.jsDate;
+  }
+
+  isDateChange(event) {
+    console.log(event.locale());
+    console.log( typeof event);
+    // this.dateOfReceiptOfOrder = new Date(event)
   }
 }

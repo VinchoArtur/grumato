@@ -34,6 +34,7 @@ import {CreateOrderComponent} from './com/project/components/add-data-modal-wind
 import {CreateUserComponent} from './com/project/components/add-data-modal-window/create-user/create-user.component';
 import {DataEffect} from './com/project/components/components-store/effets/data.effetc';
 import {DpDatePickerModule} from 'ng2-date-picker';
+import {AngularMyDatePickerModule} from "angular-mydatepicker";
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import {DpDatePickerModule} from 'ng2-date-picker';
     NbInputModule,
     NbButtonModule,
     NbTreeGridModule,
+    AngularMyDatePickerModule,
     StoreModule.forRoot(appReducers),
     NbToastrModule.forRoot(),
     EffectsModule.forRoot([LoginPageEffect, DataEffect])

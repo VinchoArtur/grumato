@@ -32,7 +32,7 @@ export class DataEffect {
   getCustomer$ = this.actions$.pipe(
     ofType<GetCustomers>(EEditorActions.GetCustomers),
     map((action) => {
-      this.httpService.getCustomers(action.payload);
+      this.httpService.getCustomers();
     })
   );
 
@@ -48,7 +48,7 @@ export class DataEffect {
   getOrders$ = this.actions$.pipe(
     ofType<GetOrders>(EEditorActions.GetOrders),
     map((action) => {
-      this.httpService.postOrders(action.payload);
+      this.httpService.getOrders();
     })
   );
 
@@ -66,10 +66,6 @@ export class DataEffect {
     map((action) => {
       this.httpService.getUsers();
     })
-    // switchMap(() => this.httpService.getUsers(this.users)),
-    // switchMap((users: Employees[]) => of(
-    //   new UsersLoaded(users)
-    // ))
   );
 
   @Effect({dispatch: false})

@@ -1,4 +1,5 @@
 export interface CustomerEntry {
+  customerCode?: number;
   surname: string;
   name: string;
   patronymic: string;

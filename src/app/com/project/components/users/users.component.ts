@@ -26,24 +26,14 @@ export class UsersComponent implements OnInit {
 
   customColumn = 'Name';
   defaultColumns = ['Command', 'Group', 'Project'];
-  allColumns = [this.customColumn, ...this.defaultColumns];
 
 
-  // users$ = this.store.pipe(select(selectUsers));
-  users: Employees[] = [{
-    surname: 'test',
-    name: 'test',
-    patronymic: 'test',
-    phoneNumber: '1234',
-    direction: 'test',
-    // role: 'test'
-  }];
+  users: Employees[] = [];
   surname: string = '';
   name: string = '';
   patronymic: string = '';
   phoneNumber: string = '';
   direction: string = '';
-  role: string = '';
 
 
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<Employees>,
@@ -52,18 +42,6 @@ export class UsersComponent implements OnInit {
               private store: Store<AppGrumatoState>,
               private toast: NbToastrService,
               private postService: HttpService) {
-    // this.users$.subscribe(user => {
-    //   this.users = user;
-    //   if (this.users.length >0) {
-    //     for(let user of this.users){
-    //       this.userName = user.name;
-    //       this.userGroup = user.Group;
-    //       this.userComand = user.Command;
-    //       this.userProject = user.Project;
-    //     }
-    //   }
-    //
-    // })
   }
 
   ngOnInit(): void {
@@ -71,7 +49,9 @@ export class UsersComponent implements OnInit {
       let parse = JSON.parse((value as BaseResponse).status);
       parse.map(testParse => {
         let parse1 = JSON.parse(testParse) as Employees;
+        let employeeCode = parse1.employeeCode;
         this.users.push({
+          employeeCode: employeeCode,
           surname: parse1.surname,
           phoneNumber: parse1.phoneNumber,
           patronymic: parse1.patronymic,
@@ -80,20 +60,7 @@ export class UsersComponent implements OnInit {
         })
       })
     });
-    // this.store.dispatch(new GetUsers());
-    // setTimeout(() => {
-      // let users$ = this.store.pipe(select(selectUsers));
-      // users$.subscribe(user => {
-      //   this.users = user;
-      // })
-    // }, 1000)
-
   }
-
-  // onSave(){
-  //   console.log(this.users);
-  //   //
-  // }
 
 
   onAddWorker() {
@@ -117,12 +84,12 @@ export class UsersComponent implements OnInit {
         }
         this.users.push(
           {
+            employeeCode: value.employeeCode,
             surname: value.surname,
             name: value.name,
             patronymic: value.patronymic,
             phoneNumber: value.phoneNumber,
             direction: value.direction,
-            // role: value.role
           }
         );
         this.cdr.detectChanges();

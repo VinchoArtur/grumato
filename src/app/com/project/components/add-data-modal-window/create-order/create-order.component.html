@@ -4,15 +4,10 @@
     <nb-card-body>
       <input type="text" nbInput class="login_input" placeholder="please enter orderDescription" [(ngModel)]="this.orderDescription">
       <input type="text" nbInput class="login_input" placeholder="please enter customerCode" [(ngModel)]="this.customerCode">
-<!--      <input type="text" nbInput class="login_input" placeholder="please enter dateOfReceiptOfOrder" [(ngModel)]="this.dateOfReceiptOfOrder" [nbDatepicker]="dateTimePicker1">-->
-<!--      <nb-calendar [date]="date" (dateChange)="handleDateChange($event)"></nb-calendar>-->
 
-      <input nbInput class="login_input" placeholder="please enter dateOfReceiptOfOrder" [(ngModel)]="this.dateOfReceiptOfOrder" [dpDayPicker]="config">
 
-<!--      <dp-date-picker class="login_date_picker" placeholder="please enter dateOfReceiptOfOrder"  format="DD-MM-YYYY" [(ngModel)]="this.dateOfReceiptOfOrder"></dp-date-picker>-->
+      <input nbInput class="login_input" placeholder="please enter dateOfReceiptOfOrder" [(ngModel)]="this.dateOfReceiptOfOrder" [dpDayPicker]="config" (onChange)="isDateChange($event)">
 
-<!--      <input type="text" nbInput class="login_input" placeholder="please enter orderExecutionDate" [(ngModel)]="this.orderExecutionDate" [nbDatepicker]="dateTimePicker2">-->
-<!--      <nb-calendar [date]="date" (dateChange)="handleDateChange($event)"></nb-calendar>-->
 
       <input nbInput class="login_input" placeholder="please enter orderExecutionDate" [(ngModel)]="this.orderExecutionDate" [dpDayPicker]="config">
 
@@ -20,6 +15,28 @@
 
       <input type="text" nbInput class="login_input" placeholder="please enter productCode" [(ngModel)]="this.productCode">
       <input type="text" nbInput class="login_input" placeholder="please enter orderCost" [(ngModel)]="this.orderCost">
+      <div class="input-group">
+        <!-- input box -->
+        <input class="form-control" name="mydate" placeholder="Select a date"
+               angular-mydatepicker #dp="angular-mydatepicker"
+               [(ngModel)]="model" [options]="myDpOptions"
+               (dateChanged)="onDateChanged($event)"/>
+
+        <!-- clear date button -->
+        <div class="input-group-append">
+          <button type="button" class="btn btn-secondary" *ngIf="model" (click)="dp.clearDate()">
+            <i class="fa fa-close"></i>
+          </button>
+        </div>
+
+        <!-- toggle calendar button -->
+        <div class="input-group-append">
+          <button type="button" class="btn btn-secondary" (click)="dp.toggleCalendar()">
+            <i class="fa fa-calendar-o"></i>
+          </button>
+        </div>
+
+      </div>
       <div class="row">
         <div class="col-md-2">
           <button nbButton status="info"  (click)="submit()">ok</button>

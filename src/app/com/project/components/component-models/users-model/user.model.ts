@@ -1,4 +1,5 @@
 export interface Employees {
+  employeeCode?: number;
   surname: string;
   name: string;
   patronymic: string;
