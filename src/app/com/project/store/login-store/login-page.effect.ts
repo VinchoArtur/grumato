@@ -13,18 +13,25 @@ export class LoginPageEffect {
 
 
 
+  constructor(private actions$: Actions,
+              private store: Store<AppGrumatoState>,
+              private router: Router,
+              private httpService: HttpService,
+              private toasterService: NbToastrService) {
+  }
+
   @Effect({dispatch: false})
   signUpUser$ = this.actions$.pipe(
     ofType<SignUpUser>(LoginPageActions.SignUpUser),
     map((action) => {
-      this.httpServie.signUpUserData(action.payload).subscribe(value => {
+      this.httpService.signUpUserData(action.payload).subscribe(value => {
         if ( (value as {status: string, code: string}).status == 'success') {
-          this.toastrService.success(
+          this.toasterService.success(
             'Done',
             'Creating'
           );
         } else {
-          this.toastrService.danger(
+          this.toasterService.danger(
             'Error',
             'Creating'
           );
@@ -37,11 +44,11 @@ export class LoginPageEffect {
   signInUser$ = this.actions$.pipe(
     ofType<LoginUser>(LoginPageActions.Login),
     map((action) => {
-      this.httpServie.signInUserData(action.payload).subscribe(value => {
+      this.httpService.signInUserData(action.payload).subscribe(value => {
         if ( (value as {status: string, code: string}).status == 'true') {
           this.router.navigate(['/view']);
         } else {
-          this.toastrService.danger(
+          this.toasterService.danger(
             'Error',
             'Authorisation'
           );
@@ -49,11 +56,4 @@ export class LoginPageEffect {
       });
     })
   );
-
-  constructor(private actions$: Actions,
-              private store: Store<AppGrumatoState>,
-              private router: Router,
-              private httpServie: HttpService,
-              private toastrService: NbToastrService) {
-  }
 }

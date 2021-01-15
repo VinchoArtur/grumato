@@ -20,7 +20,7 @@
         </div>
       </nb-card-body>
       <nb-card-footer>
-        <button nbButton class="float-left" status="success" [disabled]="isUserName()" [disabled]="isPassword()" (click)="onSubmit()">Sign in</button>
+        <button [nbSpinner]="loading" nbSpinnerStatus="danger" nbSpinnerSize="giant" nbButton class="float-left" status="success" [disabled]="isUserName()" [disabled]="isPassword()" (click)="onSubmit()">Sign in</button>
         <button nbButton class="float-right" status="basic" (click)="onClear()">Cancel</button>
       </nb-card-footer>
     </nb-card>

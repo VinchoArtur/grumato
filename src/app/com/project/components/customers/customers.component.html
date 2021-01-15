@@ -1,0 +1,60 @@
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-md-10">
+        <button nbButton status="success" (click)="onAddCustomer()">Добавить заказчика</button>
+      </div>
+<!--      <div class="col-md-2">-->
+<!--        <button nbButton status="info" class="float-right" (click)="onSave()">Сохранить</button>-->
+<!--      </div>-->
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <ul>
+      <li *ngFor="let dataUser of customers">
+        <nb-card style="border: 1px solid aquamarine">
+          <nb-card-header>
+            <div class="row">
+              <div class="col-md-10">
+                {{dataUser.surname}} - {{dataUser.name}}
+              </div>
+              <div class="col-md-2">
+                <button nbButton status="danger" class="float-right" (click)="onDelete(dataUser)">Удалить</button>
+              </div>
+            </div>
+          </nb-card-header>
+
+          <nb-card-body>
+            <div class="row">
+              <div class="col-md-2">
+                <label for="surname" class="label">Фамилия: </label>
+                <input type="text" id="surname" nbInput value="{{dataUser.surname}}">
+              </div>
+              <div class="col-md-2">
+                <label for="name" class="label">Имя: </label>
+                <input type="text" id="name" nbInput value="{{dataUser.name}}">
+              </div>
+              <div class="col-md-2">
+                <label for="patronymic" class="label">Отчество: </label>
+                <input type="text" id="patronymic" nbInput value="{{dataUser.patronymic}}">
+              </div>
+              <div class="col-md-2">
+                <label for="customercol" class="label">Количество заказчиков: </label>
+                <input type="text" id="customercol" nbInput value="{{dataUser.customercol}}">
+              </div>
+              <div class="col-md-2">
+                <label for="company" class="label">Компания: </label>
+                <input type="text" id="company" nbInput value="{{dataUser.company}}">
+              </div>
+              <div class="col-md-2">
+                <label for="companyNumber" class="label">Номер компании: </label>
+                <input type="text" id="companyNumber" nbInput value="{{dataUser.companyNumber}}">
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </li>
+    </ul>
+
+  </nb-card-body>
+</nb-card>
