@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NbDialogRef} from '@nebular/theme';
+import {Employees} from '../../component-models/users-model/user.model';
 
 @Component({
   selector: 'app-create-user',
@@ -7,6 +8,7 @@ import {NbDialogRef} from '@nebular/theme';
   styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent implements OnInit {
+  user: Employees;
   surname:string;
   name: string;
   patronymic: string;
@@ -17,12 +19,22 @@ export class CreateUserComponent implements OnInit {
   constructor(protected ref: NbDialogRef<CreateUserComponent>) { }
 
   ngOnInit(): void {
-    this.surname = '';
-    this.name = '';
-    this.patronymic = '';
-    this.phoneNumber = '';
-    this.direction = '';
-    this.role = '';
+    if (this.user) {
+      this.surname = this.user.surname;
+      this.name = this.user.name;
+      this.patronymic = this.user.patronymic;
+      this.phoneNumber = this.user.phoneNumber;
+      this.direction = this.user.direction;
+      this.role = 'нима нихалеры';
+    } else {
+      this.surname = '';
+      this.name = '';
+      this.patronymic = '';
+      this.phoneNumber = '';
+      this.direction = '';
+      this.role = '';
+    }
+
   }
   cancel() {
     this.ref.close(false)

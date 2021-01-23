@@ -12,7 +12,7 @@
   <nb-card-body>
     <ul>
       <li *ngFor="let dataUser of users">
-        <nb-card style="border: 1px solid aquamarine">
+        <nb-card (click)="showWorkerInformation(dataUser)" style="border: 1px solid aquamarine">
           <nb-card-header>
             <div class="row">
               <div class="col-md-10">
@@ -27,26 +27,26 @@
             <div class="row">
               <div class="col-md-2">
                 <label for="surname" class="label">Фамилия: </label>
-                <input type="text" id="surname" nbInput value="{{dataUser.surname}}">
+                <input type="text" id="surname" nbInput value="{{dataUser.surname}}" readonly>
               </div>
               <div class="col-md-2">
                 <label for="name" class="label">Имя: </label>
-                <input type="text" id="name" nbInput value="{{dataUser.name}}">
+                <input type="text" id="name" nbInput readonly value="{{dataUser.name}}">
               </div>
               <div class="col-md-2">
                 <label for="patronymic" class="label">Отчество: </label>
-                <input type="text" id="patronymic" nbInput value="{{dataUser.patronymic}}">
+                <input type="text" id="patronymic" nbInput readonly value="{{dataUser.patronymic}}">
               </div>
               <div class="col-md-2">
                 <label for="phoneNumber" class="label">Номер телефона: </label>
-                <input type="text" id="phoneNumber" nbInput value="{{dataUser.phoneNumber}}">
+                <input type="text" id="phoneNumber" nbInput readonly value="{{dataUser.phoneNumber}}">
               </div>
               <div class="col-md-2">
                 <label for="direction" class="label">Направление: </label>
-                <input type="text" id="direction" nbInput value="{{dataUser.direction}}">
+                <input type="text" id="direction" nbInput readonly value="{{dataUser.direction}}">
               </div><div class="col-md-2">
                 <label for="direction" class="label">Роль: </label>
-                <input type="text" id="role" nbInput value="{{dataUser.role}}">
+                <input type="text" id="role" nbInput readonly value="{{'nothing here'}}">
               </div>
             </div>
           </nb-card-body>

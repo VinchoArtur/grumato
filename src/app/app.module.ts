@@ -13,7 +13,7 @@ import {
   NbRouteTabsetModule, NbSpinnerModule,
   NbThemeModule,
   NbToastrModule,
-  NbToastrService, NbTreeGridModule
+  NbToastrService, NbTreeGridModule, NbUserModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {FormsModule} from '@angular/forms';
@@ -29,12 +29,13 @@ import {GrumatoViewComponent} from './com/project/components/grumato-view/grumat
 import { CustomersComponent } from './com/project/components/customers/customers.component';
 import { OrdersComponent } from './com/project/components/orders/orders.component';
 import { UsersComponent } from './com/project/components/users/users.component';
-import {CreateCustomerComponent} from './com/project/components/add-data-modal-window/create-customer/create-customer.component';
 import {CreateOrderComponent} from './com/project/components/add-data-modal-window/create-order/create-order.component';
-import {CreateUserComponent} from './com/project/components/add-data-modal-window/create-user/create-user.component';
 import {DataEffect} from './com/project/components/components-store/effets/data.effetc';
 import {DpDatePickerModule} from 'ng2-date-picker';
 import {AngularMyDatePickerModule} from "angular-mydatepicker";
+import { UserCardsWindowComponent } from './com/project/components/modals/user-cards-window/user-cards-window.component';
+import {CreateCustomerComponent} from './com/project/components/add-data-modal-window/create-customer/create-customer.component';
+import {CreateUserComponent} from './com/project/components/add-data-modal-window/create-user/create-user.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {AngularMyDatePickerModule} from "angular-mydatepicker";
     UsersComponent,
     CreateCustomerComponent,
     CreateOrderComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    UserCardsWindowComponent
 ],
   imports: [
     BrowserModule,
@@ -56,9 +58,6 @@ import {AngularMyDatePickerModule} from "angular-mydatepicker";
     HttpClientModule,
     AppRoutingModule,
     NoopAnimationsModule,
-    NbDialogModule.forChild(),
-    NbDatepickerModule.forRoot(),
-    NbThemeModule.forRoot({name: 'default'}),
     NbLayoutModule,
     NbEvaIconsModule,
     NbCardModule,
@@ -69,6 +68,10 @@ import {AngularMyDatePickerModule} from "angular-mydatepicker";
     NbButtonModule,
     NbTreeGridModule,
     AngularMyDatePickerModule,
+    NbUserModule,
+    NbDialogModule.forChild(),
+    NbDatepickerModule.forRoot(),
+    NbThemeModule.forRoot({name: 'default'}),
     StoreModule.forRoot(appReducers),
     NbToastrModule.forRoot(),
     EffectsModule.forRoot([LoginPageEffect, DataEffect])

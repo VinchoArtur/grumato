@@ -47,8 +47,12 @@ export class AuthComponent implements OnInit {
           password: userPassword
         }));
       }
+      if (this.userName || this.password){
+        this.userName = "";
+        this.password = "";
+      }
+      return status = "success";
     }).add();
-
   }
 
   onSubmit() {
