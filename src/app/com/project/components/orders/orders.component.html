@@ -4,15 +4,12 @@
       <div class="col-md-10">
         <button nbButton status="success" (click)="onAddOrder()">Добавить заказ</button>
       </div>
-<!--      <div class="col-md-2">-->
-<!--        <button nbButton status="info" class="float-right" (click)="onSave()">Сохранить</button>-->
-<!--      </div>-->
     </div>
   </nb-card-header>
   <nb-card-body>
     <ul>
       <li *ngFor="let dataUser of orders">
-        <nb-card style="border: 1px solid aquamarine">
+        <nb-card (click)="showWorkerInformation(dataUser)" style="border: 1px solid aquamarine">
           <nb-card-header>
             <div class="row">
               <div class="col-md-10">
@@ -27,38 +24,31 @@
             <div class="row">
               <div class="col-md-2">
                 <label for="orderDescription" class="label">Направление заказа: </label>
-                <input type="text" id="orderDescription" nbInput value="{{dataUser.orderDescription}}">
+                <input type="text" id="orderDescription" nbInput readonly value="{{dataUser.orderDescription}}">
               </div>
               <div class="col-md-2">
                 <label for="customerCode" class="label">Код заказчика: </label>
-                <input type="text" id="customerCode" nbInput value="{{dataUser.customerCode}}">
+                <input type="text" id="customerCode" nbInput readonly value="{{dataUser.customerCode}}">
               </div>
               <div class="col-md-2">
                 <label for="dateOfReceiptOfOrder" class="label">Время получения заказа: </label>
-<!--                <input type="text" id="dateOfReceiptOfOrder" nbInput value="{{dataUser.dateOfReceiptOfOrder}}">-->
-                <input id="dateOfReceiptOfOrder" nbInput placeholder="dateOfReceiptOfOrder" [nbDatepicker]="dateOfReceiptOfOrder" value="{{dataUser.dateOfReceiptOfOrder}}">
+                <input id="dateOfReceiptOfOrder" nbInput readonly placeholder="dateOfReceiptOfOrder"
+                       [nbDatepicker]="dateOfReceiptOfOrder" value="{{dataUser.dateOfReceiptOfOrder}}">
                 <nb-datepicker #dateOfReceiptOfOrder></nb-datepicker>
-
-<!--                <dp-date-picker class="login_date_picker" id="dateOfReceiptOfOrder" placeholder="please enter dateOfReceiptOfOrder"  format="DD-MM-YYYY" [(ngModel)]="this.dateOfReceiptOfOrder" value="{{dataUser.dateOfReceiptOfOrder}}"></dp-date-picker>-->
-
               </div>
               <div class="col-md-2">
                 <label for="orderExecutionDate" class="label">Время исполнения заказа: </label>
-<!--                <input type="text" id="orderExecutionDate" nbInput value="{{dataUser.orderExecutionDate}}">-->
-                <input id="orderExecutionDate" nbInput placeholder="Form Picker" [nbDatepicker]="orderExecutionDate" value="{{dataUser.orderExecutionDate}}">
+                <input id="orderExecutionDate" nbInput readonly placeholder="Form Picker" [nbDatepicker]="orderExecutionDate"
+                       value="{{dataUser.orderExecutionDate}}">
                 <nb-datepicker #orderExecutionDate></nb-datepicker>
-
-<!--                <dp-date-picker class="login_date_picker" id="orderExecutionDate" placeholder="please enter orderExecutionDate" format="DD-MM-YYYY" [(ngModel)]="this.orderExecutionDate" value="{{dataUser.orderExecutionDate}}"></dp-date-picker>-->
-
-
               </div>
               <div class="col-md-2">
                 <label for="productCode" class="label">Код продукта: </label>
-                <input type="text" id="productCode" nbInput value="{{dataUser.productCode}}">
+                <input type="text" id="productCode" nbInput readonly value="{{dataUser.productCode}}">
               </div>
               <div class="col-md-2">
                 <label for="orderCost" class="label">Цена заказа: </label>
-                <input type="text" id="orderCost" nbInput value="{{dataUser.orderCost}}">
+                <input type="text" id="orderCost" nbInput readonly value="{{dataUser.orderCost}}">
               </div>
             </div>
           </nb-card-body>

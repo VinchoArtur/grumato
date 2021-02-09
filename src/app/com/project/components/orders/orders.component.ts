@@ -87,25 +87,16 @@ export class OrdersComponent implements OnInit {
     this.postService.deleteOrder(dataUser).subscribe(value => console.log(value))
   }
 
-  // showWorkerInformation(currentUser: OrderEntry) {
-  //   let newUser: Employees;
-  //   this.dialogService.open(UserCardsWindowComponent, {
-  //     context: {
-  //       user: currentUser
-  //     }
-  //   }).onClose.subscribe(value => {
-  //     if (value) {
-  //       newUser = {
-  //         employeeCode: value.user.employeeCode,
-  //         surname: value.user.surname,
-  //         name: value.user.name,
-  //         patronymic: value.user.patronymic,
-  //         phoneNumber: value.user.phoneNumber,
-  //         direction: value.user.direction,
-  //       };
-  //       this.postService.postUsers(newUser).subscribe(value => console.log(value));
-  //     }
-  //   });
-  // }
+  showWorkerInformation(order: OrderEntry) {
+    this.dialogService.open(UserCardsWindowComponent, {
+      context: {
+        order: order
+      }
+    }).onClose.subscribe(value => {
+      if (value) {
+        console.log(value)
+      }
+    });
+  }
 
 }

@@ -49,6 +49,11 @@
 .Other-information {
 }
 
+textarea{
+  min-height: 81px;
+  max-height: 250px;
+}
+
 .card-size {
   height: auto;
   width: 60rem;
