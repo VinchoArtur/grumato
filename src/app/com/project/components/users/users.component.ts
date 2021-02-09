@@ -109,6 +109,7 @@ export class UsersComponent implements OnInit {
     }).onClose.subscribe(value => {
       if (value) {
         newUser = {
+          employeeCode: value.user.employeeCode,
           surname: value.user.surname,
           name: value.user.name,
           patronymic: value.user.patronymic,
@@ -116,10 +117,8 @@ export class UsersComponent implements OnInit {
           direction: value.user.direction,
         };
         this.postService.postUsers(newUser).subscribe(value => console.log(value));
-        ;
       }
     });
-
   }
 
   // refactorWorker() {

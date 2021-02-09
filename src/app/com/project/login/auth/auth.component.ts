@@ -42,16 +42,14 @@ export class AuthComponent implements OnInit {
       if (value) {
         userLogin = value.name;
         userPassword = value.password;
+        this.userName = userLogin;
+        this.password = userPassword;
         this.store.dispatch(new SignUpUser({
           userName: userLogin,
           password: userPassword
         }));
+        return status = "success";
       }
-      if (this.userName || this.password){
-        this.userName = "";
-        this.password = "";
-      }
-      return status = "success";
     }).add();
   }
 

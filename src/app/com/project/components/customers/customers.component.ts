@@ -7,6 +7,8 @@ import {SaveCustomers} from '../components-store/components.action';
 import {CreateCustomerComponent} from '../add-data-modal-window/create-customer/create-customer.component';
 import {OrderEntry} from '../component-models/orders-model/order.model';
 import {BaseResponse} from "../users/users.component";
+import {Employees} from '../component-models/users-model/user.model';
+import {UserCardsWindowComponent} from '../modals/user-cards-window/user-cards-window.component';
 
 @Component({
   selector: 'app-customers',
@@ -99,4 +101,26 @@ export class CustomersComponent implements OnInit {
     }
     this.postService.deleteCustomer(dataUser).subscribe(value => console.log(value))
   }
+
+  // showWorkerInformation(currentUser: Employees) {
+  //   let newUser: Employees;
+  //   this.dialogService.open(UserCardsWindowComponent, {
+  //     context: {
+  //       user: currentUser
+  //     }
+  //   }).onClose.subscribe(value => {
+  //     if (value) {
+  //       newUser = {
+  //         employeeCode: value.user.employeeCode,
+  //         surname: value.user.surname,
+  //         name: value.user.name,
+  //         patronymic: value.user.patronymic,
+  //         phoneNumber: value.user.phoneNumber,
+  //         direction: value.user.direction,
+  //       };
+  //       this.postService.postUsers(newUser).subscribe(value => console.log(value));
+  //     }
+  //   });
+  // }
+
 }

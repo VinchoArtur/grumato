@@ -5,6 +5,7 @@ import {OrderEntry} from '../component-models/orders-model/order.model';
 import {HttpService} from '../../services/http.service';
 import {CreateOrderComponent} from '../add-data-modal-window/create-order/create-order.component';
 import {BaseResponse} from "../users/users.component";
+import {UserCardsWindowComponent} from '../modals/user-cards-window/user-cards-window.component';
 
 @Component({
   selector: 'app-orders',
@@ -85,5 +86,26 @@ export class OrdersComponent implements OnInit {
     }
     this.postService.deleteOrder(dataUser).subscribe(value => console.log(value))
   }
+
+  // showWorkerInformation(currentUser: OrderEntry) {
+  //   let newUser: Employees;
+  //   this.dialogService.open(UserCardsWindowComponent, {
+  //     context: {
+  //       user: currentUser
+  //     }
+  //   }).onClose.subscribe(value => {
+  //     if (value) {
+  //       newUser = {
+  //         employeeCode: value.user.employeeCode,
+  //         surname: value.user.surname,
+  //         name: value.user.name,
+  //         patronymic: value.user.patronymic,
+  //         phoneNumber: value.user.phoneNumber,
+  //         direction: value.user.direction,
+  //       };
+  //       this.postService.postUsers(newUser).subscribe(value => console.log(value));
+  //     }
+  //   });
+  // }
 
 }

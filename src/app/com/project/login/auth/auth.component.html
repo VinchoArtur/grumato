@@ -13,10 +13,10 @@
       </nb-card-header>
       <nb-card-body>
         <div class="form-group row">
-            <input type="text" nbInput fullWidth status="info" placeholder="Login" [(ngModel)]="userName" >
+            <input type="text" nbInput fullWidth status="info" placeholder="Login" [(ngModel)]="userName" [value]="userName">
         </div>
         <div class="form-group row">
-            <input type="password" nbInput fullWidth status="info" placeholder="Password" [(ngModel)]="password" >
+            <input type="password" nbInput fullWidth status="info" placeholder="Password" [(ngModel)]="password" [value]="password">
         </div>
       </nb-card-body>
       <nb-card-footer>
