@@ -1,11 +1,12 @@
 <div>
   <nb-card class="card-size">
-    <nb-card-header>Worker information</nb-card-header>
+    <nb-card-header *ngIf="user">Worker information</nb-card-header>
+    <nb-card-header *ngIf="customer">Customer information</nb-card-header>
     <nb-card-body class="example-items-col card-body-style">
       <div class="user-flex">
         <img class="avatar" (click)="showAvatar()" src="../../../../../../assets/images/default_avatar.jpg"/>
       </div>
-      <div class="description-flex">
+      <div class="description-flex" *ngIf="user">
         <div class="description">
           <div class="FIO">
             <label for="surname" class="label">Фамилия</label>
@@ -33,6 +34,43 @@
             <label for="direction" class="label">Направление</label>
             <input #direction type="text" id="direction" nbInput fullWidth fieldSize="small" placeholder="Direction"
                    value="{{user.direction}}" (change)="changeDirection(direction)">
+          </div>
+          <div class="Other-information">
+            <label for="otherInformationUser" class="label">Дополнительная информация</label>
+            <textarea id="otherInformationUser" nbInput fullWidth placeholder="Other information"></textarea>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="description-flex" *ngIf="customer">
+        <div class="description">
+          <div class="FIO">
+            <label for="customerCompany" class="label">Компания</label>
+            <input #company type="text" id="customerCompany" nbInput fullWidth fieldSize="small" placeholder="Surname"
+              value="{{customer.company}}">
+          </div>
+          <div class="FIO">
+            <label for="customerName" class="label">Имя заказчика</label>
+            <input #customerName type="text" id="customerName" nbInput fullWidth fieldSize="small" placeholder="Name" value="{{customer.name}}" (change)="changeName(customerName)">
+          </div>
+          <div class="FIO">
+            <label for="customerSurname" class="label">Фамилия заказчика</label>
+            <input #customerSurname type="text" id="customerSurname" nbInput fullWidth fieldSize="small" placeholder="Patronymic"
+              value="{{customer.surname}}" (change)="changeSurname(customerSurname)">
+          </div>
+        </div>
+        <br>
+        <div>
+          <div class="Number">
+            <label for="customerCompanyNumber" class="label">Номер компании</label>
+            <input #customerCompanyNumber type="text" id="customerCompanyNumber" nbInput fullWidth fieldSize="small" placeholder="Phone"
+              value="{{customer.companyNumber}}">
+          </div>
+          <div class="Direction">
+            <label for="customerPatronymic" class="label">Отчество заказчика</label>
+            <input #customerPatronymic type="text" id="customerPatronymic" nbInput fullWidth fieldSize="small" placeholder="Direction"
+              value="{{customer.patronymic}}">
           </div>
           <div class="Other-information">
             <label for="otherInformation" class="label">Дополнительная информация</label>

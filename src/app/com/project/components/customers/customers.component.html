@@ -4,15 +4,12 @@
       <div class="col-md-10">
         <button nbButton status="success" (click)="onAddCustomer()">Добавить заказчика</button>
       </div>
-<!--      <div class="col-md-2">-->
-<!--        <button nbButton status="info" class="float-right" (click)="onSave()">Сохранить</button>-->
-<!--      </div>-->
     </div>
   </nb-card-header>
   <nb-card-body>
     <ul>
       <li *ngFor="let dataUser of customers">
-        <nb-card style="border: 1px solid aquamarine">
+        <nb-card style="border: 1px solid aquamarine" (click)="showWorkerInformation(dataUser)">
           <nb-card-header>
             <div class="row">
               <div class="col-md-10">
