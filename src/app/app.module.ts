@@ -10,7 +10,7 @@ import {
   NbDialogModule,
   NbInputModule,
   NbLayoutModule,
-  NbRouteTabsetModule, NbSpinnerModule,
+  NbRouteTabsetModule, NbSelectModule, NbSpinnerModule,
   NbThemeModule,
   NbToastrModule,
   NbToastrService, NbTreeGridModule, NbUserModule
@@ -61,6 +61,7 @@ import {CreateUserComponent} from './com/project/components/add-data-modal-windo
     NbLayoutModule,
     NbEvaIconsModule,
     NbCardModule,
+    NbSelectModule,
     NbRouteTabsetModule,
     NbSpinnerModule,
     NbCalendarModule,

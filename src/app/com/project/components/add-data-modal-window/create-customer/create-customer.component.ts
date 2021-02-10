@@ -13,8 +13,13 @@ export class CreateCustomerComponent implements OnInit {
   customercol: string;
   company: string;
   companyNumber: string;
+  orders: string[] = [];
 
   constructor(protected ref: NbDialogRef<CreateCustomerComponent>) { }
+
+  selectedItem = '1';
+
+  orderSelected: boolean;
 
   ngOnInit() {
     this.surname= '';
@@ -23,7 +28,18 @@ export class CreateCustomerComponent implements OnInit {
     this.customercol= '';
     this.company= '';
     this.companyNumber= '';
+
+    // if(this.customercol == ''){
+    //   this.order_name = !this.order_name;
+    // }
+    // else {
+    //   this.order_name = this.order_name;
+    // }
   }
+
+  // onClear(){
+  //   return this.customercol = "";
+  // }
 
   cancel() {
     this.ref.close(false)
@@ -40,4 +56,9 @@ export class CreateCustomerComponent implements OnInit {
     })
   }
 
+  addOrder(order: HTMLInputElement) {
+    this.orders.push(order.value);
+    this.orderSelected = !this.orderSelected;
+    order.value = '';
+  }
 }

@@ -2,18 +2,24 @@
   <nb-card>
     <nb-card-header>Customer</nb-card-header>
     <nb-card-body>
-      <input type="text" nbInput class="login_input" placeholder="please enter surname" [(ngModel)]="this.surname">
-      <input type="text" nbInput class="login_input" placeholder="please enter name" [(ngModel)]="this.name">
-      <input type="text" nbInput class="login_input" placeholder="please enter patronymic" [(ngModel)]="this.patronymic">
-      <input type="text" nbInput class="login_input" placeholder="please enter customercol" [(ngModel)]="this.customercol">
-      <input type="text" nbInput class="login_input" placeholder="please enter company" [(ngModel)]="this.company">
-      <input type="text" nbInput class="login_input" placeholder="please enter companyNumber" [(ngModel)]="this.companyNumber">
+      <input type="text" nbInput class="login_input" placeholder="enter surname" [(ngModel)]="this.surname">
+      <input type="text" nbInput class="login_input" placeholder="enter name" [(ngModel)]="this.name">
+      <input type="text" nbInput class="login_input" placeholder="enter patronymic" [(ngModel)]="this.patronymic">
+      <input type="text" nbInput class="login_input" placeholder="enter company" [(ngModel)]="this.company">
+      <input type="text" nbInput class="login_input" placeholder="enter companyNumber" [(ngModel)]="this.companyNumber">
+      <div class="row add_order_flex">
+        <input type="text" #orderValue nbInput class="login_input order_input" placeholder="enter customercol" [(ngModel)]="this.customercol">
+        <button nbButton class="add_order" status="success" (click)="addOrder(orderValue)">+</button>
+      </div>
+      <nb-select class="order_dropdown" placeholder="Select Showcase" [(selected)]="selectedItem">
+        <nb-option *ngFor="let order of orders">{{order}}</nb-option>
+      </nb-select>
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-4">
           <button nbButton status="info"  (click)="submit()">ok</button>
         </div>
-        <div class="col-md-4">
-          <button nbButton status="danger" class="login_button" (click)="cancel()">cancel</button>
+        <div>
+          <button nbButton status="danger" class="cancel_button" (click)="cancel()">cancel</button>
         </div>
       </div>
     </nb-card-body>
