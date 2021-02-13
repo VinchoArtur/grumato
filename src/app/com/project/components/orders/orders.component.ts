@@ -6,6 +6,10 @@ import {HttpService} from '../../services/http.service';
 import {CreateOrderComponent} from '../add-data-modal-window/create-order/create-order.component';
 import {BaseResponse} from "../users/users.component";
 import {UserCardsWindowComponent} from '../modals/user-cards-window/user-cards-window.component';
+import {select, Store} from "@ngrx/store";
+import {AppGrumatoState} from "../../store/app-grumato.state";
+import {selectData, selectOrders} from "../components-state/data.selector";
+import {GetAllDataLoad} from "../components-store/components.action";
 
 @Component({
   selector: 'app-orders',
@@ -14,10 +18,6 @@ import {UserCardsWindowComponent} from '../modals/user-cards-window/user-cards-w
 })
 export class OrdersComponent implements OnInit {
 
-  customColumn = 'Name';
-  defaultColumns = ['Customer', 'Developer', 'Time', 'Pay'];
-
-  dataSource: NbTreeGridDataSource<Employees>;
 
   orders: OrderEntry[] = [];
   orderDescription: string = '';
@@ -26,22 +26,23 @@ export class OrdersComponent implements OnInit {
   orderExecutionDate: Date;
   productCode: string = '';
   orderCost: string = '';
+  orders$ = this.store.pipe(select(selectData));
 
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<Employees>,
               private dialogService: NbDialogService,
               private cdr: ChangeDetectorRef,
               private toast: NbToastrService,
+              private store: Store<AppGrumatoState>,
               private postService: HttpService) {
   }
 
   ngOnInit(): void {
-    this.postService.getOrders().subscribe(value => {
-      let parse = JSON.parse((value as BaseResponse).status);
-      parse.map(order => {
-        let parse1 = JSON.parse(order) as OrderEntry;
-       this.orders.push(parse1);
-      })
-    });
+    this.store.dispatch(new GetAllDataLoad());
+  this.orders$.subscribe(value => {
+    if (value) {
+      this.orders = value.data.orders;
+    }
+  });
   }
 
 
@@ -62,16 +63,7 @@ export class OrdersComponent implements OnInit {
           return;
         }
       }
-      this.orders.push(
-        {
-          orderDescription: value.orderDescription,
-          customerCode: value.customerCode,
-          dateOfReceiptOfOrder: value.dateOfReceiptOfOrder,
-          orderExecutionDate: value.orderExecutionDate,
-          productCode: value.productCode,
-          orderCost: value.orderCost
-        }
-      );
+      this.store.dispatch(new GetAllDataLoad());
       this.cdr.detectChanges();
       this.postService.postOrders(newOrder).subscribe(value => console.log(value));
     });

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {Store} from "@ngrx/store";
+import {AppGrumatoState} from "../../store/app-grumato.state";
+import {GetAllDataLoad} from "../components-store/components.action";
 
 @Component({
   selector: 'app-grumato-view',
@@ -8,9 +11,10 @@ import {Router} from '@angular/router';
 })
 export class GrumatoViewComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private store: Store<AppGrumatoState>) { }
 
   ngOnInit(): void {
+    this.store.dispatch(new GetAllDataLoad());
   }
 
   logout() {

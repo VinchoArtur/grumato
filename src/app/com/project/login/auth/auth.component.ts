@@ -5,6 +5,7 @@ import {NbDialogRef, NbDialogService, NbToastrService} from '@nebular/theme';
 import {LoginSignUpWindowComponent} from './login-sign-up-window/login-sign-up-window.component';
 import {Store} from '@ngrx/store';
 import {AppGrumatoState} from '../../store/app-grumato.state';
+import {GetAllDataLoad} from "../../components/components-store/components.action";
 
 @Component({
   selector: 'app-auth',
@@ -13,7 +14,8 @@ import {AppGrumatoState} from '../../store/app-grumato.state';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private httpService: HttpService, private store: Store<AppGrumatoState>, private dialogService: NbDialogService, private toastrService: NbToastrService) {
+  constructor(private httpService: HttpService, private store: Store<AppGrumatoState>,
+              private dialogService: NbDialogService, private toastrService: NbToastrService) {
   }
 
 
@@ -30,6 +32,7 @@ export class AuthComponent implements OnInit {
   loading: boolean;
 
   ngOnInit(): void {
+    this.store.dispatch(new GetAllDataLoad());
   }
 
 
@@ -54,15 +57,8 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.store.dispatch(new LoginUser({
-    //   userName: this.userName,
-    //   password: this.password,
-    //   userId: 111
-    // }));
-
     this.loading = true;
-    setTimeout(() => this.loading = false, 3000);
-
+    setTimeout(() => this.loading = false);
     if (this.userName && this.password) {
       this.store.dispatch(new LoginUser({
         userName: this.userName,

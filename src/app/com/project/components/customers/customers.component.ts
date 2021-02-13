@@ -5,6 +5,10 @@ import {CustomerEntry} from '../component-models/customers-model/customer.model'
 import {CreateCustomerComponent} from '../add-data-modal-window/create-customer/create-customer.component';
 import {BaseResponse} from "../users/users.component";
 import {UserCardsWindowComponent} from '../modals/user-cards-window/user-cards-window.component';
+import {AppGrumatoState} from "../../store/app-grumato.state";
+import {select, Store} from "@ngrx/store";
+import {selectData} from "../components-state/data.selector";
+import {GetAllDataLoad} from "../components-store/components.action";
 
 @Component({
   selector: 'app-customers',
@@ -21,6 +25,7 @@ export class CustomersComponent implements OnInit {
 
 
   customers: CustomerEntry[] = [];
+  customers$ = this.store.pipe(select(selectData));
   data = [];
   surname: string = '';
   name: string = '';
@@ -32,27 +37,18 @@ export class CustomersComponent implements OnInit {
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<CustomerEntry>,
               private dialogService: NbDialogService,
               private cdr: ChangeDetectorRef,
-              // private store: Store<AppState>,
+              private store: Store<AppGrumatoState>,
               private toast: NbToastrService,
               private postService: HttpService) {
   }
 
   ngOnInit(): void {
-    this.postService.getCustomers().subscribe(value => {
-      let parse = JSON.parse((value as BaseResponse).status);
-      parse.map(customer => {
-        let parse1 = JSON.parse(customer) as CustomerEntry;
-        this.customers.push({
-          name: parse1.name,
-          company: parse1.company,
-          companyNumber: parse1.companyNumber,
-          customerCode: parse1.customerCode,
-          customercol: parse1.customercol,
-          patronymic: parse1.patronymic,
-          surname: parse1.surname
-        })
-      })
-    });
+    this.store.dispatch(new GetAllDataLoad());
+    this.customers$.subscribe(value => {
+      if (value) {
+        this.customers = value.data.customers;
+      }
+    })
   }
 
 
@@ -73,19 +69,12 @@ export class CustomersComponent implements OnInit {
           return;
         }
       }
-      this.customers.push(
-        {surname: value.surname,
-          name: value.name,
-          patronymic: value.patronymic,
-          customercol: value.customercol,
-          company: value.company,
-          companyNumber: value.companyNumber}
-      );
-      this.cdr.detectChanges();
       this.postService.postCustomer(newCustomer).subscribe(value => {
         console.log(value);
+        this.store.dispatch(new GetAllDataLoad());
       });
     });
+    this.cdr.detectChanges();
   }
 
   onDelete(dataUser: CustomerEntry) {

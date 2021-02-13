@@ -7,7 +7,7 @@ import {HttpService} from '../../../services/http.service';
 import {NbToastrService} from '@nebular/theme';
 import {map} from 'rxjs/operators';
 import {
-  EEditorActions,
+  EEditorActions, GetAllDataLoad, GetAllDataLoaded,
   GetCustomers,
   GetOrders,
   GetUsers,
@@ -15,6 +15,9 @@ import {
   SaveOrders,
   SaveUsers
 } from '../components.action';
+import {DataModel} from "../../component-models/data-model/data-model";
+import {BaseResponse} from "../../users/users.component";
+import {DataState} from "../../components-state/data.state";
 
 @Injectable()
 export class DataEffect {
@@ -75,4 +78,22 @@ export class DataEffect {
       this.httpService.postUsers(action.payload);
     })
   );
+
+  @Effect({dispatch: false})
+  getAllData$ = this.actions$.pipe(
+    ofType<GetAllDataLoad>(EEditorActions.GetAllDataLoad),
+    map((action) => {
+      this.httpService.getAllData().subscribe(response => {
+        let data = JSON.parse((response as BaseResponse).status);
+        let result: DataState = {
+          data: {
+            users: data.employees,
+            orders: data.orders,
+            customers: data.customer
+          }};
+        if (result)
+        this.store.dispatch(new GetAllDataLoaded(result))
+      });
+    })
+  )
 }

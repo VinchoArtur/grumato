@@ -1,16 +1,14 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Employees} from '../component-models/users-model/user.model';
 import {NbDialogService, NbToastrService, NbTreeGridDataSourceBuilder} from '@nebular/theme';
 import {HttpService} from '../../services/http.service';
 
 import {select, Store} from '@ngrx/store';
 import {AppGrumatoState} from '../../store/app-grumato.state';
-// import {DataState} from '../components-state/data.state';
-// import {selectUsers} from '../components-state/data.selector';
 import {UserCardsWindowComponent} from '../modals/user-cards-window/user-cards-window.component';
 import {CreateUserComponent} from '../add-data-modal-window/create-user/create-user.component';
-import {SaveUsers} from '../components-store/components.action';
-
+import {GetAllDataLoad, SaveUsers} from '../components-store/components.action';
+import {selectData} from "../components-state/data.selector";
 
 
 export class BaseResponse {
@@ -24,12 +22,14 @@ export class BaseResponse {
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, AfterViewInit {
+  ngAfterViewInit(): void {
+  }
 
   customColumn = 'Name';
   defaultColumns = ['Command', 'Group', 'Project'];
 
-
+  users$ = this.store.pipe(select(selectData));
   users: Employees[] = [];
   surname: string = '';
   name: string = '';
@@ -47,21 +47,12 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.postService.getUsers().subscribe(value => {
-      let parse = JSON.parse((value as BaseResponse).status);
-      parse.map(testParse => {
-        let parse1 = JSON.parse(testParse) as Employees;
-        let employeeCode = parse1.employeeCode;
-        this.users.push({
-          employeeCode: employeeCode,
-          surname: parse1.surname,
-          phoneNumber: parse1.phoneNumber,
-          patronymic: parse1.patronymic,
-          direction: parse1.direction,
-          name: parse1.name
-        })
-      })
-    });
+    this.store.dispatch(new GetAllDataLoad());
+    this.users$.subscribe(value => {
+      if (value) {
+        this.users = value.data.users;
+      }
+    })
   }
 
   onAddWorker() {

@@ -12,7 +12,6 @@ import {HttpService} from '../../services/http.service';
 export class LoginPageEffect {
 
 
-
   constructor(private actions$: Actions,
               private store: Store<AppGrumatoState>,
               private router: Router,
@@ -25,7 +24,7 @@ export class LoginPageEffect {
     ofType<SignUpUser>(LoginPageActions.SignUpUser),
     map((action) => {
       this.httpService.signUpUserData(action.payload).subscribe(value => {
-        if ( (value as {status: string, code: string}).status == 'success') {
+        if ((value as { status: string, code: string }).status == 'success') {
           this.toasterService.success(
             'Done',
             'Creating'
@@ -45,7 +44,7 @@ export class LoginPageEffect {
     ofType<LoginUser>(LoginPageActions.Login),
     map((action) => {
       this.httpService.signInUserData(action.payload).subscribe(value => {
-        if ( (value as {status: string, code: string}).status == 'true') {
+        if ((value as { status: string, code: string }).status == 'true') {
           this.router.navigate(['/view']);
         } else {
           this.toasterService.danger(
