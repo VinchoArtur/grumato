@@ -74,16 +74,17 @@ export class UsersComponent implements OnInit, AfterViewInit {
             return;
           }
         }
-        this.users.push(
-          {
-            employeeCode: value.employeeCode,
-            surname: value.surname,
-            name: value.name,
-            patronymic: value.patronymic,
-            phoneNumber: value.phoneNumber,
-            direction: value.direction,
-          }
-        );
+        // this.users.push(
+        //   {
+        //     employeeCode: value.employeeCode,
+        //     surname: value.surname,
+        //     name: value.name,
+        //     patronymic: value.patronymic,
+        //     phoneNumber: value.phoneNumber,
+        //     direction: value.direction,
+        //   }
+        // );
+        this.store.dispatch(new GetAllDataLoad());
         this.cdr.detectChanges();
         this.postService.postUsers(newUser).subscribe(value => console.log(value));
         this.store.dispatch(new SaveUsers(newUser));

@@ -29,3 +29,9 @@ nb-card-header{
 .sign-up {
   padding: 0px;
 }
+
+.button-panel {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
