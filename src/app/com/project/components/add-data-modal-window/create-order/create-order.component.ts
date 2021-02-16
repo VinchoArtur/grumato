@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {NbDialogRef} from '@nebular/theme';
 import {IAngularMyDpOptions, IMyDateModel} from "angular-mydatepicker";
+import {AppGrumatoState} from "../../../store/app-grumato.state";
+import {Store} from "@ngrx/store";
+import {CustomerEntry} from "../../component-models/customers-model/customer.model";
 
 @Component({
   selector: 'app-create-order',
@@ -9,22 +12,24 @@ import {IAngularMyDpOptions, IMyDateModel} from "angular-mydatepicker";
 })
 export class CreateOrderComponent implements OnInit {
   orderDescription: string;
-  customerCode: string;
   dateOfReceiptOfOrder: Date;
   orderExecutionDate: Date;
   orderName: string;
   orderCost: string;
+  customers: CustomerEntry[];
 
 
-  model: IMyDateModel = null;
+  startDate: IMyDateModel = null;
+  endDate: IMyDateModel = null;
 
   myDpOptions: IAngularMyDpOptions = {
     dateRange: false,
     dateFormat: 'dd.mm.yyyy'
   };
+  selectedCustomer: CustomerEntry = null;
 
 
-  constructor(protected ref: NbDialogRef<CreateOrderComponent>) {
+  constructor(protected ref: NbDialogRef<CreateOrderComponent>, private store: Store<AppGrumatoState>) {
   }
 
   ngOnInit() {
@@ -37,7 +42,7 @@ export class CreateOrderComponent implements OnInit {
   submit() {
     this.ref.close({
       orderDescription: this.orderDescription,
-      customerCode: this.customerCode,
+      customerCode: this.selectedCustomer.customerCode,
       dateOfReceiptOfOrder: this.dateOfReceiptOfOrder,
       orderExecutionDate: this.orderExecutionDate,
       orderName: this.orderName,
@@ -45,8 +50,15 @@ export class CreateOrderComponent implements OnInit {
     })
   }
 
-  onDateChanged(event: IMyDateModel): void {
-    this.dateOfReceiptOfOrder = event.singleDate.jsDate;
-    this.orderExecutionDate = event.singleDate.jsDate;
+  onDateChanged(event: IMyDateModel, isStartDate: boolean): void {
+    if (isStartDate) {
+      this.dateOfReceiptOfOrder = event.singleDate.jsDate;
+    } else {
+      this.orderExecutionDate = event.singleDate.jsDate;
+    }
+  }
+
+  changeSelectedItem(customer: CustomerEntry) {
+    this.selectedCustomer = customer;
   }
 }

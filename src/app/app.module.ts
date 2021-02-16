@@ -12,7 +12,7 @@ import {
   NbDialogModule,
   NbInputModule,
   NbLayoutModule,
-  NbRouteTabsetModule,
+  NbRouteTabsetModule, NbSelectModule,
   NbSpinnerModule,
   NbThemeModule,
   NbToastrModule,
@@ -81,6 +81,7 @@ import {GetAllDataLoad} from "./com/project/components/components-store/componen
     NbThemeModule.forRoot({name: 'default'}),
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([LoginPageEffect, DataEffect]),
+    NbSelectModule,
     NbToastrModule.forRoot()
   ],
   providers: [HttpService, NbToastrService,

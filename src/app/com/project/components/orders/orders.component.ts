@@ -10,6 +10,7 @@ import {select, Store} from "@ngrx/store";
 import {AppGrumatoState} from "../../store/app-grumato.state";
 import {selectData, selectOrders} from "../components-state/data.selector";
 import {GetAllDataLoad, SaveOrders} from "../components-store/components.action";
+import {CustomerEntry} from "../component-models/customers-model/customer.model";
 
 @Component({
   selector: 'app-orders',
@@ -21,7 +22,7 @@ export class OrdersComponent implements OnInit {
 
   orders: OrderEntry[] = [];
   orders$ = this.store.pipe(select(selectData));
-
+  customers: CustomerEntry[];
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<Employees>,
               private dialogService: NbDialogService,
               private cdr: ChangeDetectorRef,
@@ -34,7 +35,7 @@ export class OrdersComponent implements OnInit {
   this.orders$.subscribe(value => {
     if (value) {
       this.orders = value.data.orders;
-      console.log(value);
+      this.customers = value.data.customers;
       this.cdr.detectChanges();
     }
   });
@@ -42,7 +43,9 @@ export class OrdersComponent implements OnInit {
 
 
   onAddOrder() {
-    this.dialogService.open(CreateOrderComponent).onClose.subscribe(value => {
+    this.dialogService.open(CreateOrderComponent, {context: {
+      customers: this.customers
+      }}).onClose.subscribe(value => {
       if (value) {
         this.store.dispatch(new SaveOrders(value))
       }

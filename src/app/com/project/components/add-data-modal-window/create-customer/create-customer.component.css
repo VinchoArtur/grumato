@@ -1,7 +1,10 @@
 /*.add_order_panel {*/
 /*  display: none;*/
 /*}*/
-
+.create-customer {
+  display: flex;
+  flex-direction: column;
+}
 .add_order_flex{
   width: 220px;
   margin-left: 0px;
@@ -31,7 +34,7 @@
   left: 4em;
 }
 
-.login_input{
+.create-customer-margin-bottom{
   display: block;
   margin-bottom: 2rem;
 }

@@ -2,88 +2,65 @@
   <nb-card>
     <nb-card-header>Order</nb-card-header>
     <nb-card-body>
-      <input type="text" nbInput class="login_input" placeholder="please enter orderDescription"
-             [(ngModel)]="this.orderDescription">
-      <input type="text" nbInput class="login_input" placeholder="please enter customerCode"
-             [(ngModel)]="this.customerCode">
-
-      <div class="input-group date-bottom">
-        <!-- input box --------------1---------------->
-        <input class="form-control" name="mydate" placeholder="Select a date"
-               angular-mydatepicker #dp="angular-mydatepicker"
-               [(ngModel)]="model" [options]="myDpOptions"
-               (dateChanged)="onDateChanged($event)"/>
-
-        <!-- clear date button -->
-        <div class="input-group-append">
-          <button type="button" class="btn btn-secondary" *ngIf="model" (click)="dp.clearDate()">
-            <i class="fa fa-close"></i>
-          </button>
+      <nb-select placeholder="Select Showcase" [selected]="selectedCustomer" fullWidth class="create-order-margin-bottom">
+        <nb-option *ngFor="let customer of customers" [value]="customer"
+                   (click)="changeSelectedItem(customer)">{{customer.name}}</nb-option>
+      </nb-select>
+      <div *ngIf="selectedCustomer">
+        <input type="text" nbInput class="login-input create-order-margin-bottom" disabled fullWidth
+               [(ngModel)]="selectedCustomer.customerCode">
+        <div class="input-group create-order-margin-bottom">
+          <!-- input box --------------1---------------->
+          <input class="form-control" name="mydate" placeholder="Select a start date"
+                 angular-mydatepicker #dateStart="angular-mydatepicker"
+                 [(ngModel)]="startDate" [options]="myDpOptions"
+                 (dateChanged)="onDateChanged($event, true)"/>
+          <!-- clear date button -->
+          <div class="input-group-append">
+            <button type="button" class="btn btn-secondary clean-calendar" *ngIf="startDate" (click)="dateStart.clearDate()">
+              <i class="far fa-calendar-times"></i>
+            </button>
+          </div>
+          <!-- toggle calendar button -->
+          <div class="input-group-append">
+            <button type="button" class="btn btn-secondary apply-calendar" (click)="dateStart.toggleCalendar()">
+              <i class="far fa-calendar-plus"></i>
+            </button>
+          </div>
         </div>
-
-        <!-- toggle calendar button -->
-        <div class="input-group-append">
-          <button type="button" class="btn btn-secondary" (click)="dp.toggleCalendar()">
-            <i class="fa fa-calendar-o"></i>
-          </button>
+        <div class="input-group create-order-margin-bottom">
+          <!-- input box --------------2-------------------->
+          <input class="form-control" name="mydate" placeholder="Select a end date"
+                 angular-mydatepicker #dateEnd="angular-mydatepicker"
+                 [(ngModel)]="endDate" [options]="myDpOptions"
+                 (dateChanged)="onDateChanged($event, false)"/>
+          <!-- clear date button -->
+          <div class="input-group-append">
+            <button type="button" class="btn btn-secondary clean-calendar" *ngIf="endDate" (click)="dateEnd.clearDate()">
+              <i class="far fa-calendar-times"></i>
+            </button>
+          </div>
+          <!-- toggle calendar button -->
+          <div class="input-group-append">
+            <button type="button" class="btn btn-secondary apply-calendar" (click)="dateEnd.toggleCalendar()">
+              <i class="far fa-calendar-plus"></i>
+            </button>
+          </div>
         </div>
-      </div>
-
-      <div class="input-group date-bottom">
-        <!-- input box --------------2-------------------->
-        <input class="form-control" name="mydate" placeholder="Select a date"
-               angular-mydatepicker #dp="angular-mydatepicker"
-               [(ngModel)]="model" [options]="myDpOptions"
-               (dateChanged)="onDateChanged($event)"/>
-
-        <!-- clear date button -->
-        <div class="input-group-append">
-          <button type="button" class="btn btn-secondary" *ngIf="model" (click)="dp.clearDate()">
-            <i class="fa fa-close"></i>
-          </button>
+        <input type="text" nbInput class="login-input create-order-margin-bottom" placeholder="please enter order name" fullWidth
+               [(ngModel)]="this.orderName">
+        <input type="text" nbInput class="login-input create-order-margin-bottom" placeholder="please enter orderCost" fullWidth
+               [(ngModel)]="this.orderCost">
+        <div class="input-group create-order-margin-bottom">
+          <textarea nbInput fullWidth placeholder="please enter order description" [(ngModel)]="orderDescription"></textarea>
         </div>
-
-        <!-- toggle calendar button -->
-        <div class="input-group-append">
-          <button type="button" class="btn btn-secondary" (click)="dp.toggleCalendar()">
-            <i class="fa fa-calendar-o"></i>
-          </button>
-        </div>
-      </div>
-
-      <input type="text" nbInput class="login_input" placeholder="please enter order name"
-             [(ngModel)]="this.orderName">
-      <input type="text" nbInput class="login_input" placeholder="please enter orderCost" [(ngModel)]="this.orderCost">
-
-      <div class="input-group date-bottom">
-        <!-- input box -->
-        <input class="form-control" name="mydate" placeholder="Select a date"
-               angular-mydatepicker #dp="angular-mydatepicker"
-               [(ngModel)]="model" [options]="myDpOptions"
-               (dateChanged)="onDateChanged($event)"/>
-
-
-        <!-- clear date button -->
-        <div class="input-group-append">
-          <button type="button" class="btn btn-secondary" *ngIf="model" (click)="dp.clearDate()">
-            <i class="fa fa-close"></i>
-          </button>
-        </div>
-
-        <!-- toggle calendar button -->
-        <div class="input-group-append">
-          <button type="button" class="btn btn-secondary" (click)="dp.toggleCalendar()">
-            <i class="fa fa-calendar-o"></i>
-          </button>
-        </div>
-
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <button nbButton status="info" (click)="submit()">ok</button>
-        </div>
-        <div>
-          <button nbButton status="danger" class="login_button" (click)="cancel()">cancel</button>
+        <div class="row">
+          <div class="col-md-4">
+            <button nbButton status="info" (click)="submit()">ok</button>
+          </div>
+          <div>
+            <button nbButton status="danger" class="login-button" (click)="cancel()">cancel</button>
+          </div>
         </div>
       </div>
     </nb-card-body>
