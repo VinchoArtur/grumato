@@ -1,0 +1,60 @@
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-md-10">
+        <button nbButton status="success" (click)="onAddOrder()">Добавить заказ</button>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <ul *ngIf="(orders$ | async)">
+      <li *ngFor="let order of (orders$ | async).data.orders">
+        <nb-card (click)="showWorkerInformation(order)" style="border: 1px solid aquamarine">
+          <nb-card-header>
+            <div class="row">
+              <div class="col-md-10">
+                {{order.orderCode}} - {{order.orderName}}
+              </div>
+              <div class="col-md-2">
+                <button nbButton status="danger" class="float-right" (click)="onDelete(order)">Удалить</button>
+              </div>
+            </div>
+          </nb-card-header>
+          <nb-card-body>
+            <div class="row">
+              <div class="col-md-2">
+                <label class="label">Название заказа: </label>
+                <input type="text" nbInput readonly value="{{order.orderName}}">
+              </div>
+              <div class="col-md-2">
+                <label class="label">Описание заказа: </label>
+                <input type="text" nbInput readonly value="{{order.orderDescription}}">
+              </div>
+              <div class="col-md-2">
+                <label class="label">Код заказчика: </label>
+                <input type="text" nbInput readonly value="{{order.customerCode}}">
+              </div>
+              <div class="col-md-2">
+                <label  class="label">Дата начала выполнения заказа: </label>
+                <input  nbInput readonly placeholder="dateOfReceiptOfOrder"
+                       [nbDatepicker]="dateOfReceiptOfOrder" value="{{order.dateOfReceiptOfOrder}}">
+                <nb-datepicker #dateOfReceiptOfOrder></nb-datepicker>
+              </div>
+              <div class="col-md-2">
+                <label class="label">Дата окончания выполнения заказа: </label>
+                <input  nbInput readonly placeholder="Form Picker" [nbDatepicker]="orderExecutionDate"
+                       value="{{order.orderExecutionDate}}">
+                <nb-datepicker #orderExecutionDate></nb-datepicker>
+              </div>
+              <div class="col-md-2">
+                <label class="label">Цена заказа: </label>
+                <input type="text" nbInput readonly value="{{order.orderCost}}">
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </li>
+    </ul>
+
+  </nb-card-body>
+</nb-card>

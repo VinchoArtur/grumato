@@ -1,0 +1,21 @@
+.create-order-margin-bottom {
+  margin-bottom: 2rem;
+}
+
+.login-button {
+  position: relative;
+  left: 88px;
+}
+
+.login-input{
+  width: 266px;
+  display: block;
+}
+
+.clean-calendar {
+  background-color: #ff3d71;
+}
+
+.apply-calendar{
+  background-color: #00d68f;
+}

@@ -1,0 +1,20 @@
+.label {
+  font-size: 18px;
+  font-family: Broadway, serif;
+  display: block;
+}
+
+li {
+  list-style-type: none;
+}
+
+.card-header-flex {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.user-content-flex {
+  display: flex;
+  justify-content: space-around;
+  white-space: nowrap;
+}

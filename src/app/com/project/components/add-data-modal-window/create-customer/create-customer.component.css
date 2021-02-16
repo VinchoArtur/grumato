@@ -1,0 +1,44 @@
+/*.add_order_panel {*/
+/*  display: none;*/
+/*}*/
+.create-customer {
+  display: flex;
+  flex-direction: column;
+}
+.add_order_flex{
+  width: 220px;
+  margin-left: 0px;
+  justify-content: space-between;
+}
+
+.order_input {
+  width: 170px;
+}
+
+.add_order {
+  width: 40px;
+  height: 40px;
+}
+
+.order_dropdown {
+  margin-bottom: 2rem;
+}
+
+.cancel_order {
+  position: relative;
+  left: 6em;
+}
+
+.cancel_button {
+  position: relative;
+  left: 4em;
+}
+
+.create-customer-margin-bottom{
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.order_input {
+  max-width: 170px;
+}

@@ -1,0 +1,12 @@
+<nb-layout>
+  <nb-layout-column class="colored-column-basic">
+    <nb-card>
+      <nb-card-header status="primary">
+        <button nbButton class="float-right" status="info" (click)="logout()">Logout</button>
+      </nb-card-header>
+      <nb-card-body>
+        <nb-route-tabset [tabs]="tabs" fullWidth></nb-route-tabset>
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+</nb-layout>

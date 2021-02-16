@@ -4,12 +4,6 @@
   "newProjectRoot": "projects",
   "projects": {
     "grumato": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -28,8 +22,9 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@nebular/theme/styles/prebuilt/default.css",
-              "src/styles.scss"
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "src/styles.css",
+              "node_modules/@nebular/theme/styles/prebuilt/default.scss"
             ],
             "scripts": []
           },
@@ -123,7 +118,8 @@
             }
           }
         }
-      }
+      },
+      "projectType": "application"
     }
   },
   "defaultProject": "grumato",

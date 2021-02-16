@@ -1,0 +1,55 @@
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-md-10">
+        <button nbButton status="success" (click)="onAddWorker()">Добавить работника</button>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <ul>
+      <li *ngFor="let dataUser of users">
+        <nb-card (click)="showWorkerInformation(dataUser)" style="border: 1px solid aquamarine">
+          <nb-card-header>
+            <div class="row card-header-flex">
+              <div class="col-md-6">
+                {{dataUser.surname}} - {{dataUser.name}}
+              </div>
+              <div class="col-md-6">
+                <button nbButton status="danger" class="float-right" (click)="onDelete(dataUser)">Удалить</button>
+              </div>
+            </div>
+          </nb-card-header>
+          <nb-card-body class="container col col-sm col-md col-lg col-xl">
+            <div class="row user-content-flex">
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label class="col-md-12" for="userSurname" class="label">Фамилия: </label>
+                <input class="col-md-12" type="text" id="userSurname" nbInput value="{{dataUser.surname}}" readonly>
+              </div>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label class="col-md-12" for="userName" class="label">Имя: </label>
+                <input class="col-md-12" type="text" id="userName" nbInput readonly value="{{dataUser.name}}">
+              </div>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label class="col-md-12" for="userPatronymic" class="label">Отчество: </label>
+                <input class="col-md-12" type="text" id="userPatronymic" nbInput readonly value="{{dataUser.patronymic}}">
+              </div>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label class="col-md-12" for="userPhoneNumber" class="label">Номер телефона: </label>
+                <input class="col-md-12" type="text" id="userPhoneNumber" nbInput readonly value="{{dataUser.phoneNumber}}">
+              </div>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label class="col-md-12" for="userDirection" class="label">Направление: </label>
+                <input class="col-md-12" type="text" id="userDirection" nbInput readonly value="{{dataUser.direction}}">
+              </div>
+              <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                <label class="col-md-12" for="userRole" class="label">Роль: </label>
+                <input class="col-md-12" type="text" id="userRole" nbInput readonly value="{{'nothing here'}}">
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </li>
+    </ul>
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,24 @@
+<div class="col-md-12">
+  <nb-card>
+    <nb-card-header>Customer</nb-card-header>
+    <nb-card-body class="create-customer">
+      <input type="text" nbInput class="create-customer-margin-bottom" placeholder="enter surname" [(ngModel)]="this.surname">
+      <input type="text" nbInput class="create-customer-margin-bottom" placeholder="enter name" [(ngModel)]="this.name">
+      <input type="text" nbInput class="create-customer-margin-bottom" placeholder="enter patronymic" [(ngModel)]="this.patronymic">
+      <input type="text" nbInput class="create-customer-margin-bottom" placeholder="enter company" [(ngModel)]="this.company">
+      <input type="text" nbInput class="create-customer-margin-bottom" placeholder="enter companyNumber" [(ngModel)]="this.companyNumber">
+      <div class="row add_order_flex">
+        <input type="text" #orderValue nbInput class="create-customer-margin-bottom order_input" placeholder="enter customercol" [(ngModel)]="this.customercol">
+        <button nbButton class="add_order" status="success" (click)="addOrder(orderValue)">+</button>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <button nbButton status="info"  (click)="submit()">ok</button>
+        </div>
+        <div>
+          <button nbButton status="danger" class="cancel_button" (click)="cancel()">cancel</button>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
