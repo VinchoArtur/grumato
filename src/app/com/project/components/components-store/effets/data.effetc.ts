@@ -4,10 +4,11 @@ import {Store} from '@ngrx/store';
 import {AppGrumatoState} from '../../../store/app-grumato.state';
 import {Router} from '@angular/router';
 import {HttpService} from '../../../services/http.service';
-import {NbToastrService} from '@nebular/theme';
 import {map} from 'rxjs/operators';
 import {
   EEditorActions,
+  GetAllDataLoad,
+  GetAllDataLoaded,
   GetCustomers,
   GetOrders,
   GetUsers,
@@ -15,10 +16,11 @@ import {
   SaveOrders,
   SaveUsers
 } from '../components.action';
+import {BaseResponse} from "../../users/users.component";
+import {DataState} from "../../components-state/data.state";
 
 @Injectable()
 export class DataEffect {
-
 
 
   constructor(private actions$: Actions,
@@ -56,9 +58,11 @@ export class DataEffect {
   addOrders$ = this.actions$.pipe(
     ofType<SaveOrders>(EEditorActions.SaveOrders),
     map((action) => {
-      this.httpService.postOrders(action.payload);
-    })
-  );
+      this.httpService.postOrders(action.payload).subscribe(value => {
+        console.log(value);
+        this.store.dispatch(new GetAllDataLoad());
+      });
+    }));
 
   @Effect({dispatch: false})
   getUsers$ = this.actions$.pipe(
@@ -75,4 +79,23 @@ export class DataEffect {
       this.httpService.postUsers(action.payload);
     })
   );
+
+  @Effect({dispatch: false})
+  getAllData$ = this.actions$.pipe(
+    ofType<GetAllDataLoad>(EEditorActions.GetAllDataLoad),
+    map((action) => {
+      this.httpService.getAllData().subscribe(response => {
+        let data = JSON.parse((response as BaseResponse).status);
+        let result: DataState = {
+          data: {
+            users: data.employees,
+            orders: data.orders,
+            customers: data.customer
+          }
+        };
+        if (result)
+          this.store.dispatch(new GetAllDataLoaded(result))
+      });
+    })
+  )
 }

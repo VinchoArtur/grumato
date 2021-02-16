@@ -1,15 +1,14 @@
-import {initialLoginPageState, LoginPageState} from "./login-store/login-page.state";
-import {DataState} from '../components/components-state/data.state';
+import {DataState, initialDataState} from '../components/components-state/data.state';
+import {DataModel} from "../components/component-models/data-model/data-model";
 
 export interface AppGrumatoState {
-  loginState: LoginPageState;
-  isLoading: boolean;
-  dataState: DataState
-
+  data: DataState
 }
 
 export const initialAppGrumatoState: AppGrumatoState = {
-  loginState: initialLoginPageState,
-  isLoading: false,
-  dataState: null,
+  data: initialDataState,
 };
+
+export function getInitialState(): AppGrumatoState {
+  return initialAppGrumatoState;
+}

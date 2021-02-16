@@ -1,15 +1,13 @@
-import {CustomerEntry} from '../component-models/customers-model/customer.model';
-import {OrderEntry} from '../component-models/orders-model/order.model';
-import {Employees} from '../component-models/users-model/user.model';
+import {DataModel} from "../component-models/data-model/data-model";
 
 export interface DataState {
-  customer: CustomerEntry[];
-  order: OrderEntry[];
-  user: Employees[];
+  data: DataModel
 }
 
 export const initialDataState: DataState = {
-  customer: [],
-  order: [],
-  user: []
-}
+    data: {
+      users: [],
+      customers: [],
+      orders: []
+    }
+};

@@ -1,9 +1,16 @@
+.date-bottom {
+  /*display: flex;*/
+  /*flex-wrap: nowrap;*/
+  margin-bottom: 2rem;
+}
+
 .login_button {
   position: relative;
-  left: 5em;
+  left: 88px;
 }
 
 .login_input{
+  width: 266px;
   display: block;
   margin-bottom: 2rem;
 }

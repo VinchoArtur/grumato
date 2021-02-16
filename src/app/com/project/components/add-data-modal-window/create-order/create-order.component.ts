@@ -12,31 +12,22 @@ export class CreateOrderComponent implements OnInit {
   customerCode: string;
   dateOfReceiptOfOrder: Date;
   orderExecutionDate: Date;
-  productCode: string;
+  orderName: string;
   orderCost: string;
-  date: Date = new Date();
-  config: any;
 
+
+  model: IMyDateModel = null;
 
   myDpOptions: IAngularMyDpOptions = {
     dateRange: false,
     dateFormat: 'dd.mm.yyyy'
-    // other options are here...
   };
 
-  model: IMyDateModel = null;
 
-
-
-  constructor(protected ref: NbDialogRef<CreateOrderComponent>) { }
+  constructor(protected ref: NbDialogRef<CreateOrderComponent>) {
+  }
 
   ngOnInit() {
-    this.orderDescription = '';
-    this.customerCode = '';
-    this.dateOfReceiptOfOrder = new Date();
-    this.orderExecutionDate = new Date();
-    this.productCode = '';
-    this.orderCost = '';
   }
 
   cancel() {
@@ -49,23 +40,13 @@ export class CreateOrderComponent implements OnInit {
       customerCode: this.customerCode,
       dateOfReceiptOfOrder: this.dateOfReceiptOfOrder,
       orderExecutionDate: this.orderExecutionDate,
-      productCode: this.productCode,
+      orderName: this.orderName,
       orderCost: this.orderCost,
     })
-  }
-
-  handleDateChange($event: any) {
-
   }
 
   onDateChanged(event: IMyDateModel): void {
     this.dateOfReceiptOfOrder = event.singleDate.jsDate;
     this.orderExecutionDate = event.singleDate.jsDate;
-  }
-
-  isDateChange(event) {
-    console.log(event.locale());
-    console.log( typeof event);
-    // this.dateOfReceiptOfOrder = new Date(event)
   }
 }

@@ -1,14 +1,14 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Employees} from '../component-models/users-model/user.model';
 import {NbDialogService, NbToastrService, NbTreeGridDataSourceBuilder} from '@nebular/theme';
 import {HttpService} from '../../services/http.service';
-import {CreateUserComponent} from '../add-data-modal-window/create-user/create-user.component';
-import {GetUsers, SaveUsers} from '../components-store/components.action';
+
 import {select, Store} from '@ngrx/store';
 import {AppGrumatoState} from '../../store/app-grumato.state';
-import {DataState} from '../components-state/data.state';
-import {selectUsers} from '../components-state/data.selector';
-
+import {UserCardsWindowComponent} from '../modals/user-cards-window/user-cards-window.component';
+import {CreateUserComponent} from '../add-data-modal-window/create-user/create-user.component';
+import {GetAllDataLoad, SaveUsers} from '../components-store/components.action';
+import {selectData} from "../components-state/data.selector";
 
 
 export class BaseResponse {
@@ -22,12 +22,14 @@ export class BaseResponse {
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, AfterViewInit {
+  ngAfterViewInit(): void {
+  }
 
   customColumn = 'Name';
   defaultColumns = ['Command', 'Group', 'Project'];
 
-
+  users$ = this.store.pipe(select(selectData));
   users: Employees[] = [];
   surname: string = '';
   name: string = '';
@@ -45,23 +47,13 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.postService.getUsers().subscribe(value => {
-      let parse = JSON.parse((value as BaseResponse).status);
-      parse.map(testParse => {
-        let parse1 = JSON.parse(testParse) as Employees;
-        let employeeCode = parse1.employeeCode;
-        this.users.push({
-          employeeCode: employeeCode,
-          surname: parse1.surname,
-          phoneNumber: parse1.phoneNumber,
-          patronymic: parse1.patronymic,
-          direction: parse1.direction,
-          name: parse1.name
-        })
-      })
-    });
+    this.store.dispatch(new GetAllDataLoad());
+    this.users$.subscribe(value => {
+      if (value) {
+        this.users = value.data.users;
+      }
+    })
   }
-
 
   onAddWorker() {
     let newUser: Employees;
@@ -82,22 +74,60 @@ export class UsersComponent implements OnInit {
             return;
           }
         }
-        this.users.push(
-          {
-            employeeCode: value.employeeCode,
-            surname: value.surname,
-            name: value.name,
-            patronymic: value.patronymic,
-            phoneNumber: value.phoneNumber,
-            direction: value.direction,
-          }
-        );
+        // this.users.push(
+        //   {
+        //     employeeCode: value.employeeCode,
+        //     surname: value.surname,
+        //     name: value.name,
+        //     patronymic: value.patronymic,
+        //     phoneNumber: value.phoneNumber,
+        //     direction: value.direction,
+        //   }
+        // );
+        this.store.dispatch(new GetAllDataLoad());
         this.cdr.detectChanges();
-        this.postService.postUsers(newUser).subscribe(value => console.log(value)  );
+        this.postService.postUsers(newUser).subscribe(value => console.log(value));
         this.store.dispatch(new SaveUsers(newUser));
       }
     });
   }
+
+  showWorkerInformation(currentUser: Employees) {
+    let newUser: Employees;
+    this.dialogService.open(UserCardsWindowComponent, {
+      context: {
+        user: currentUser
+      }
+    }).onClose.subscribe(value => {
+      if (value) {
+        newUser = {
+          employeeCode: value.user.employeeCode,
+          surname: value.user.surname,
+          name: value.user.name,
+          patronymic: value.user.patronymic,
+          phoneNumber: value.user.phoneNumber,
+          direction: value.user.direction,
+        };
+        this.postService.postUsers(newUser).subscribe(value => console.log(value));
+      }
+    });
+  }
+
+  // refactorWorker() {
+  //   let newUser: Employees;
+  //   this.dialogService.open(CreateUserComponent).onClose.subscribe(value => {
+  //     if (value) {
+  //       newUser = {
+  //         surname: value.surname,
+  //         name: value.name,
+  //         patronymic: value.patronymic,
+  //         phoneNumber: value.phoneNumber,
+  //         direction: value.direction,
+  //         // role: value.role
+  //       };
+  //     }
+  //   });
+  // }
 
   onDelete(data: Employees) {
     for (let item = 0; item < this.users.length; item++) {
@@ -109,3 +139,4 @@ export class UsersComponent implements OnInit {
     this.postService.deleteUser(data).subscribe(value => console.log(value));
   }
 }
+

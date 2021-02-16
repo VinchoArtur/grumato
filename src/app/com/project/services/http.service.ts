@@ -65,12 +65,10 @@ export class HttpService {
     console.log(value);
     return this.http.post("http://localhost:8080/customers/delete", s, {headers: {"Content-type": "application/json"}})
   }
-  //Руки за такаое надо оторвать
   getOrders(){
     return this.http.get("http://localhost:8080/orders", {headers: {"Content-type": "application/json"}})
   }
 
-  //Руки за такаое надо оторвать
   postOrders(order: OrderEntry) {
     let body = {
       order: order
@@ -81,7 +79,6 @@ export class HttpService {
     return this.http.post("http://localhost:8080/orders/add", value, {headers: {"Content-type": "application/json"}})
   }
 
-  //Руки за такаое надо оторвать
   deleteOrder(value: OrderEntry) {
     let body = {
       order: value
@@ -112,5 +109,9 @@ export class HttpService {
     console.log("delete");
     console.log(value);
     return this.http.post("http://localhost:8080/users/delete", s, {headers: {"Content-type": "application/json"}})
+  }
+
+  getAllData() {
+    return this.http.get('http://localhost:8080/data', {headers: {"Content-type": "application/json"}})
   }
 }
