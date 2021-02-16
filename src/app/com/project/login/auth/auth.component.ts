@@ -32,7 +32,6 @@ export class AuthComponent implements OnInit {
   loading: boolean;
 
   ngOnInit(): void {
-    this.store.dispatch(new GetAllDataLoad());
   }
 
 

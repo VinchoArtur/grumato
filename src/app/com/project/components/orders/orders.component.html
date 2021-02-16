@@ -7,48 +7,48 @@
     </div>
   </nb-card-header>
   <nb-card-body>
-    <ul>
-      <li *ngFor="let dataUser of orders">
-        <nb-card (click)="showWorkerInformation(dataUser)" style="border: 1px solid aquamarine">
+    <ul *ngIf="(orders$ | async)">
+      <li *ngFor="let order of (orders$ | async).data.orders">
+        <nb-card (click)="showWorkerInformation(order)" style="border: 1px solid aquamarine">
           <nb-card-header>
             <div class="row">
               <div class="col-md-10">
-                {{dataUser.orderDescription}} - {{dataUser.productCode}}
+                {{order.orderCode}} - {{order.orderName}}
               </div>
               <div class="col-md-2">
-                <button nbButton status="danger" class="float-right" (click)="onDelete(dataUser)">Удалить</button>
+                <button nbButton status="danger" class="float-right" (click)="onDelete(order)">Удалить</button>
               </div>
             </div>
           </nb-card-header>
           <nb-card-body>
             <div class="row">
               <div class="col-md-2">
-                <label for="orderDescription" class="label">Направление заказа: </label>
-                <input type="text" id="orderDescription" nbInput readonly value="{{dataUser.orderDescription}}">
+                <label class="label">Название заказа: </label>
+                <input type="text" nbInput readonly value="{{order.orderName}}">
               </div>
               <div class="col-md-2">
-                <label for="customerCode" class="label">Код заказчика: </label>
-                <input type="text" id="customerCode" nbInput readonly value="{{dataUser.customerCode}}">
+                <label class="label">Описание заказа: </label>
+                <input type="text" nbInput readonly value="{{order.orderDescription}}">
               </div>
               <div class="col-md-2">
-                <label for="dateOfReceiptOfOrder" class="label">Время получения заказа: </label>
-                <input id="dateOfReceiptOfOrder" nbInput readonly placeholder="dateOfReceiptOfOrder"
-                       [nbDatepicker]="dateOfReceiptOfOrder" value="{{dataUser.dateOfReceiptOfOrder}}">
+                <label class="label">Код заказчика: </label>
+                <input type="text" nbInput readonly value="{{order.customerCode}}">
+              </div>
+              <div class="col-md-2">
+                <label  class="label">Дата начала выполнения заказа: </label>
+                <input  nbInput readonly placeholder="dateOfReceiptOfOrder"
+                       [nbDatepicker]="dateOfReceiptOfOrder" value="{{order.dateOfReceiptOfOrder}}">
                 <nb-datepicker #dateOfReceiptOfOrder></nb-datepicker>
               </div>
               <div class="col-md-2">
-                <label for="orderExecutionDate" class="label">Время исполнения заказа: </label>
-                <input id="orderExecutionDate" nbInput readonly placeholder="Form Picker" [nbDatepicker]="orderExecutionDate"
-                       value="{{dataUser.orderExecutionDate}}">
+                <label class="label">Дата окончания выполнения заказа: </label>
+                <input  nbInput readonly placeholder="Form Picker" [nbDatepicker]="orderExecutionDate"
+                       value="{{order.orderExecutionDate}}">
                 <nb-datepicker #orderExecutionDate></nb-datepicker>
               </div>
               <div class="col-md-2">
-                <label for="productCode" class="label">Код продукта: </label>
-                <input type="text" id="productCode" nbInput readonly value="{{dataUser.productCode}}">
-              </div>
-              <div class="col-md-2">
-                <label for="orderCost" class="label">Цена заказа: </label>
-                <input type="text" id="orderCost" nbInput readonly value="{{dataUser.orderCost}}">
+                <label class="label">Цена заказа: </label>
+                <input type="text" nbInput readonly value="{{order.orderCost}}">
               </div>
             </div>
           </nb-card-body>

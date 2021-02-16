@@ -9,7 +9,7 @@ import {UserCardsWindowComponent} from '../modals/user-cards-window/user-cards-w
 import {select, Store} from "@ngrx/store";
 import {AppGrumatoState} from "../../store/app-grumato.state";
 import {selectData, selectOrders} from "../components-state/data.selector";
-import {GetAllDataLoad} from "../components-store/components.action";
+import {GetAllDataLoad, SaveOrders} from "../components-store/components.action";
 
 @Component({
   selector: 'app-orders',
@@ -20,12 +20,6 @@ export class OrdersComponent implements OnInit {
 
 
   orders: OrderEntry[] = [];
-  orderDescription: string = '';
-  customerCode: string = '';
-  dateOfReceiptOfOrder: Date;
-  orderExecutionDate: Date;
-  productCode: string = '';
-  orderCost: string = '';
   orders$ = this.store.pipe(select(selectData));
 
   constructor(private dataSourceBuilder: NbTreeGridDataSourceBuilder<Employees>,
@@ -37,10 +31,11 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new GetAllDataLoad());
   this.orders$.subscribe(value => {
     if (value) {
       this.orders = value.data.orders;
+      console.log(value);
+      this.cdr.detectChanges();
     }
   });
   }
@@ -48,30 +43,15 @@ export class OrdersComponent implements OnInit {
 
   onAddOrder() {
     this.dialogService.open(CreateOrderComponent).onClose.subscribe(value => {
-      let newOrder: OrderEntry = {
-        orderDescription: value.orderDescription,
-        customerCode: value.customerCode,
-        dateOfReceiptOfOrder: value.dateOfReceiptOfOrder,
-        orderExecutionDate: value.orderExecutionDate,
-        productCode: value.productCode,
-        orderCost: value.orderCost
-      };
-      for (let order of this.orders) {
-        if (order.productCode == newOrder.productCode) {
-          // ToDo change to filter in backend part
-          this.toast.danger("Такой заказ существует", "Внимание");
-          return;
-        }
+      if (value) {
+        this.store.dispatch(new SaveOrders(value))
       }
-      this.store.dispatch(new GetAllDataLoad());
-      this.cdr.detectChanges();
-      this.postService.postOrders(newOrder).subscribe(value => console.log(value));
     });
   }
 
   onDelete(dataUser: OrderEntry) {
     for (let item = 0; item < this.orders.length; item++) {
-      if (this.orders[item].productCode == dataUser.productCode) {
+      if (this.orders[item].orderCode == dataUser.orderCode) {
         this.orders.splice(item, 1);
         this.cdr.detectChanges();
       }

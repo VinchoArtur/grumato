@@ -14,7 +14,6 @@ export class GrumatoViewComponent implements OnInit {
   constructor(private router: Router, private store: Store<AppGrumatoState>) { }
 
   ngOnInit(): void {
-    this.store.dispatch(new GetAllDataLoad());
   }
 
   logout() {
