@@ -8,4 +8,13 @@ li {
   list-style-type: none;
 }
 
-/*input:disabled{}*/
+.card-header-flex {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.user-content-flex {
+  display: flex;
+  justify-content: space-around;
+  white-space: nowrap;
+}
